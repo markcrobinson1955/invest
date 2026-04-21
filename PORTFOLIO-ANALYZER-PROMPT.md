@@ -22,6 +22,7 @@ If the user explicitly asks to edit or revise this analyzer file after the sessi
 # Portfolio Analysis Prompt
 
 **Analyzer last updated:** April 21, 2026
+**Document last revised:** April 21, 2026 — 11:45 PM ICT
 
 Paste this prompt along with your CRITERIA.md file and your portfolio file into Claude.ai or ChatGPT to generate a full portfolio alignment analysis.
 
@@ -46,7 +47,7 @@ Then follow the matching branch:
 
 Do not attempt to fetch anything. Read the embedded CRITERIA.md directly. Confirm load with this message, followed immediately by the disclaimer block and Question 1:
 
-> Document loaded. PORTFOLIO-ANALYZER-PROMPT.md, last updated [analyzer date]. CRITERIA.md loaded from context, last updated [CRITERIA.md date from the Version / Last full refresh line]. Staleness check: [X days old, within/past 30-day threshold].
+> Document loaded. PORTFOLIO-ANALYZER-PROMPT.md, last updated [analyzer date]. CRITERIA.md loaded from context, last updated [CRITERIA.md date from the Version / Last full refresh line]. Staleness check: [X days old, within/past 30-day threshold]. Analysis date: [current date and time].
 
 ### Branch B — CRITERIA.md is not in context
 
@@ -56,7 +57,7 @@ Attempt to fetch CRITERIA.md from GitHub at this URL:
 
 If the fetch succeeds, confirm load with this message, followed immediately by the disclaimer block and Question 1:
 
-> Document loaded. PORTFOLIO-ANALYZER-PROMPT.md, last updated [analyzer date]. CRITERIA.md fetched from GitHub, last updated [CRITERIA.md date from the Version / Last full refresh line]. Staleness check: [X days old, within/past 30-day threshold].
+> Document loaded. PORTFOLIO-ANALYZER-PROMPT.md, last updated [analyzer date]. CRITERIA.md fetched from GitHub, last updated [CRITERIA.md date from the Version / Last full refresh line]. Staleness check: [X days old, within/past 30-day threshold]. Analysis date: [current date and time].
 
 If the fetch fails, state this explicitly and stop:
 
@@ -86,7 +87,7 @@ You are analyzing a personal investment portfolio against five frameworks using 
 
 **Single consolidated rule on specific securities:** Do not recommend specific funds, tickers, or individual securities anywhere in this analysis. All recommendations must be expressed in allocation categories and portfolio construction principles only (e.g., "reduce long-duration bond allocation from X% to Y%," "add inflation-linked bond allocation of 10–15%"). This rule applies throughout every section of the output.
 
-**Version reporting and staleness check:** The analyzer's last-updated date and CRITERIA.md's last-updated date are reported at load time per the On Load instruction. At the start of any analysis output, repeat both dates and apply the staleness check.
+**Version reporting and staleness check:** The analyzer's last-updated date and CRITERIA.md's last-updated date are reported at load time per the On Load instruction. At the start of any analysis output, repeat both dates, the current date and time, and apply the staleness check.
 
 **User Input collection:** Before beginning any analysis, ask the user the questions listed in the USER INPUT section one at a time, waiting for each answer before asking the next. Once all questions are answered and the portfolio file is received, proceed directly to the analysis without further prompting or confirmation. Do not wait for additional confirmation. If the user answers partially, proceed with reasonable defaults (USD base currency, no prioritized outcome) and state the defaults applied.
 
@@ -295,14 +296,15 @@ After the user answers the document question, present this immediately — no va
 
 ---
 
-**I'm also happy to keep going if you have questions. For example:**
+**Select a or b for the document, or ask any question. You can also choose a topic to discuss:**
 
-- Tell me more about what Dalio / Dimon / Buffett / Blanchard / Marks actually believes
-- What's happening in the market right now that affects my portfolio?
-- Walk me through any recommendation in more detail
-- Or anything else — about your holdings, the frameworks, the current macro environment, or your options
+d) Tell me more about what one of these experts actually believes
 
-What would you like to know?
+e) What's happening in the market right now that affects my portfolio?
+
+f) Walk me through any recommendation in more detail
+
+g) Anything else — about your holdings, the frameworks, the current macro environment, or your options
 
 ---
 
