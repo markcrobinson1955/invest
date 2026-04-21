@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio Alignment Analyzer</title>
+<title>Portfolio Alignment Analyzer.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -309,11 +309,11 @@
 
 <section>
   <h2><span class="step-number">01.</span>Copy the analyzer</h2>
-  <p>Click the button to copy the full analyzer prompt to your clipboard.</p>
+  <p>Click the button to copy the full analyzer prompt plus the current criteria to your clipboard. Everything the AI needs is included — no fetching required.</p>
 
   <div class="loader-wrap" id="loader">
     <div class="spinner"></div>
-    <span>Loading the latest analyzer from GitHub…</span>
+    <span>Loading the latest analyzer and criteria from GitHub…</span>
   </div>
 
   <div class="ready-panel" id="readyPanel">
@@ -341,15 +341,12 @@
     <a href="https://chat.openai.com/" target="_blank" rel="noopener">ChatGPT →</a>
     <a href="https://gemini.google.com/app" target="_blank" rel="noopener">Gemini →</a>
   </div>
-  <div class="callout">
-    <strong>A note on assistants:</strong> Claude and ChatGPT generally handle this prompt well. Gemini sometimes summarizes instead of running it — if that happens, simply tell it "run the analyzer" and it should continue.
-  </div>
 </section>
 
 <section>
   <h2><span class="step-number">03.</span>Upload your portfolio</h2>
   <p>When the analyzer asks, upload your portfolio in whatever format you have — CSV, Excel, PDF, a screenshot, or plain text. If you use tax-advantaged accounts and want tax-location advice, include account names (IRA, Roth, Taxable).</p>
-  <p class="hint" style="font-size: 0.875rem; color: var(--ink-faint); font-style: italic;">Your portfolio goes only to the AI assistant you chose. This page never sees or stores it.</p>
+  <p style="font-size: 0.875rem; color: var(--ink-faint); font-style: italic;">Your portfolio goes only to the AI assistant you chose. This page never sees or stores it.</p>
 </section>
 
 <hr class="divider">
@@ -364,7 +361,7 @@
     <li>Drawdown stress tests against historical scenarios</li>
     <li>Tax location recommendations, if you are a US taxpayer and included account names</li>
   </ul>
-  <p class="hint" style="font-size: 0.875rem; color: var(--ink-faint); font-style: italic;">This is educational analysis, not personalized financial advice. The analyzer never recommends specific securities — only allocation categories and portfolio construction principles.</p>
+  <p style="font-size: 0.875rem; color: var(--ink-faint); font-style: italic;">This is educational analysis, not personalized financial advice. The analyzer never recommends specific securities — only allocation categories and portfolio construction principles.</p>
 </section>
 
 </div>
@@ -374,9 +371,8 @@
 </footer>
 
 <script>
-// Raw URL for the analyzer prompt on GitHub.
-// Cache-busting via ?t=timestamp forces a fresh fetch on each page load.
 const ANALYZER_URL = 'https://raw.githubusercontent.com/markcrobinson1955/invest/main/PORTFOLIO-ANALYZER-PROMPT.md';
+const CRITERIA_URL = 'https://raw.githubusercontent.com/markcrobinson1955/invest/main/CRITERIA.md';
 
 const loader = document.getElementById('loader');
 const readyPanel = document.getElementById('readyPanel');
@@ -387,7 +383,7 @@ const statusEl = document.getElementById('status');
 const versionInfo = document.getElementById('versionInfo');
 const errorMessage = document.getElementById('errorMessage');
 
-let analyzerPrompt = null;
+let combinedPrompt = null;
 
 function showLoader() {
   loader.style.display = 'flex';
@@ -408,10 +404,23 @@ function showError(msg) {
   if (msg) errorMessage.textContent = msg;
 }
 
-function extractVersion(text) {
-  // Look for "Analyzer last updated:" line in the prompt
+function extractAnalyzerVersion(text) {
   const match = text.match(/Analyzer last updated:\s*([^\n]+)/i);
   return match ? match[1].trim() : null;
+}
+
+function extractCriteriaVersion(text) {
+  // Try common patterns for version/date in CRITERIA.md header
+  const patterns = [
+    /Version\s*[:\/]?\s*Last full refresh[:\s]+([^\n]+)/i,
+    /Version[:\s]+([^\n]+)/i,
+    /Last (?:full )?(?:refresh|updated)[:\s]+([^\n]+)/i
+  ];
+  for (const pattern of patterns) {
+    const match = text.match(pattern);
+    if (match) return match[1].trim();
+  }
+  return null;
 }
 
 function showStatus(message, isError = false) {
@@ -421,45 +430,63 @@ function showStatus(message, isError = false) {
   setTimeout(() => statusEl.classList.remove('visible'), 3500);
 }
 
-async function fetchAnalyzer() {
+async function fetchFile(url) {
+  const response = await fetch(`${url}?t=${Date.now()}`, { cache: 'no-store' });
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status} fetching ${url.split('/').pop()}`);
+  }
+  const text = await response.text();
+  if (!text || text.length < 500) {
+    throw new Error(`${url.split('/').pop()} content looks incomplete`);
+  }
+  return text;
+}
+
+async function fetchBoth() {
   showLoader();
   try {
-    const url = `${ANALYZER_URL}?t=${Date.now()}`;
-    const response = await fetch(url, { cache: 'no-store' });
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
-    }
-    const text = await response.text();
-    if (!text || text.length < 500) {
-      throw new Error('Fetched content looks incomplete');
-    }
-    analyzerPrompt = text;
-    const version = extractVersion(text);
-    if (version) {
-      versionInfo.textContent = `Analyzer version: ${version}`;
-    } else {
-      versionInfo.textContent = '';
-    }
+    const [analyzerText, criteriaText] = await Promise.all([
+      fetchFile(ANALYZER_URL),
+      fetchFile(CRITERIA_URL)
+    ]);
+
+    // Concatenate: analyzer prompt first, then a clear separator, then CRITERIA.md
+    combinedPrompt =
+      analyzerText +
+      '\n\n---\n\n' +
+      '# CRITERIA.md (embedded — do not fetch separately)\n\n' +
+      'The following is the current CRITERIA.md, included here so no network fetch is required. ' +
+      'Per the analyzer\'s On Load instructions (Branch A), read this embedded version directly.\n\n' +
+      '---\n\n' +
+      criteriaText;
+
+    const analyzerVersion = extractAnalyzerVersion(analyzerText);
+    const criteriaVersion = extractCriteriaVersion(criteriaText);
+
+    const versionParts = [];
+    if (analyzerVersion) versionParts.push(`Analyzer: ${analyzerVersion}`);
+    if (criteriaVersion) versionParts.push(`Criteria: ${criteriaVersion}`);
+    versionInfo.textContent = versionParts.join(' · ');
+
     showReady();
   } catch (err) {
     console.error('Fetch failed:', err);
-    showError(`The analyzer couldn't be loaded from GitHub (${err.message}). This usually means GitHub is temporarily unreachable or your connection dropped.`);
+    showError(`Couldn't load from GitHub (${err.message}). This usually means GitHub is temporarily unreachable or your connection dropped.`);
   }
 }
 
 async function copyPrompt() {
-  if (!analyzerPrompt) {
+  if (!combinedPrompt) {
     showStatus('Analyzer not loaded yet.', true);
     return;
   }
   try {
-    await navigator.clipboard.writeText(analyzerPrompt);
-    const wordCount = analyzerPrompt.split(/\s+/).length;
+    await navigator.clipboard.writeText(combinedPrompt);
+    const wordCount = combinedPrompt.split(/\s+/).length;
     showStatus(`Copied (${wordCount.toLocaleString()} words). Paste into your assistant.`);
   } catch (err) {
-    // Fallback for browsers that block clipboard API
     const textarea = document.createElement('textarea');
-    textarea.value = analyzerPrompt;
+    textarea.value = combinedPrompt;
     textarea.style.position = 'fixed';
     textarea.style.left = '-9999px';
     document.body.appendChild(textarea);
@@ -475,10 +502,9 @@ async function copyPrompt() {
 }
 
 copyBtn.addEventListener('click', copyPrompt);
-retryBtn.addEventListener('click', fetchAnalyzer);
+retryBtn.addEventListener('click', fetchBoth);
 
-// Kick off the fetch on page load
-fetchAnalyzer();
+fetchBoth();
 </script>
 </body>
 </html>
