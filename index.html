@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Alignment Analyzer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-soft: #3d3d3d;
+    --ink-faint: #6b6b6b;
+    --paper: #faf8f4;
+    --paper-warm: #f3efe6;
+    --rule: #d8d2c5;
+    --accent: #8b2323;
+    --accent-soft: #b85c5c;
+    --success: #2d5a3d;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  header {
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    font-variation-settings: "opsz" 96;
+  }
+
+  h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .subtitle {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--ink-soft);
+    font-style: italic;
+    max-width: 56ch;
+  }
+
+  section {
+    margin-bottom: 3rem;
+  }
+
+  h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+    color: var(--ink);
+  }
+
+  .step-number {
+    display: inline-block;
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--accent);
+    margin-right: 0.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+  }
+
+  p strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  ol, ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--ink-soft);
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
+  .loader-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 0;
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    color: var(--ink-faint);
+    font-size: 1rem;
+  }
+
+  .spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--rule);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .ready-panel, .error-panel {
+    display: none;
+  }
+
+  .ready-panel.visible, .error-panel.visible {
+    display: block;
+  }
+
+  .button-row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  button {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 0.95rem 1.75rem;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent);
+  }
+
+  .btn-primary:disabled {
+    background: var(--ink-faint);
+    cursor: not-allowed;
+  }
+
+  .status {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--success);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .status.visible {
+    opacity: 1;
+  }
+
+  .status.error {
+    color: var(--accent);
+  }
+
+  .version-info {
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    margin-top: 0.75rem;
+    font-style: italic;
+  }
+
+  .error-panel {
+    background: var(--paper-warm);
+    border-left: 3px solid var(--accent);
+    padding: 1.25rem 1.5rem;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+
+  .error-panel strong {
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .retry-btn {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 0.5rem 1rem;
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .retry-btn:hover {
+    background: var(--accent);
+    color: var(--paper);
+  }
+
+  .llm-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .llm-links a {
+    font-size: 0.95rem;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+    transition: border-color 0.2s ease;
+  }
+
+  .llm-links a:hover {
+    border-bottom-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 3rem 0;
+  }
+
+  .callout {
+    background: var(--paper-warm);
+    border-left: 3px solid var(--accent);
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+
+  .callout strong {
+    color: var(--ink);
+  }
+
+  footer {
+    margin-top: 5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    text-align: center;
+    font-style: italic;
+  }
+
+  @media (max-width: 640px) {
+    .container { padding: 2.5rem 1.25rem 4rem; }
+    .button-row { flex-direction: column; align-items: stretch; }
+    button { width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="eyebrow">Private Investment Tool</div>
+  <h1>Portfolio Alignment <em>Analyzer</em></h1>
+  <p class="subtitle">Compare your portfolio against five investing frameworks — Dalio, Dimon, Buffett, Blanchard, and Marks — using any major AI assistant.</p>
+</header>
+
+<section>
+  <h2><span class="step-number">01.</span>Copy the analyzer</h2>
+  <p>Click the button to copy the full analyzer prompt to your clipboard.</p>
+
+  <div class="loader-wrap" id="loader">
+    <div class="spinner"></div>
+    <span>Loading the latest analyzer from GitHub…</span>
+  </div>
+
+  <div class="ready-panel" id="readyPanel">
+    <div class="button-row">
+      <button class="btn-primary" id="copyBtn">Copy analyzer</button>
+      <span class="status" id="status"></span>
+    </div>
+    <div class="version-info" id="versionInfo"></div>
+  </div>
+
+  <div class="error-panel" id="errorPanel">
+    <strong>Couldn't reach GitHub</strong>
+    <span id="errorMessage">The analyzer couldn't be loaded. This usually means GitHub is temporarily unreachable or your connection dropped.</span>
+    <div>
+      <button class="retry-btn" id="retryBtn">Try again</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="step-number">02.</span>Paste into any AI assistant</h2>
+  <p>Open a new conversation with your preferred assistant, paste, and send. The analyzer will ask four brief questions (base currency, time horizon, taxpayer status, whether to prioritize a specific framework) and then ask you to upload your portfolio.</p>
+  <div class="llm-links">
+    <a href="https://claude.ai/new" target="_blank" rel="noopener">Claude →</a>
+    <a href="https://chat.openai.com/" target="_blank" rel="noopener">ChatGPT →</a>
+    <a href="https://gemini.google.com/app" target="_blank" rel="noopener">Gemini →</a>
+  </div>
+  <div class="callout">
+    <strong>A note on assistants:</strong> Claude and ChatGPT generally handle this prompt well. Gemini sometimes summarizes instead of running it — if that happens, simply tell it "run the analyzer" and it should continue.
+  </div>
+</section>
+
+<section>
+  <h2><span class="step-number">03.</span>Upload your portfolio</h2>
+  <p>When the analyzer asks, upload your portfolio in whatever format you have — CSV, Excel, PDF, a screenshot, or plain text. If you use tax-advantaged accounts and want tax-location advice, include account names (IRA, Roth, Taxable).</p>
+  <p class="hint" style="font-size: 0.875rem; color: var(--ink-faint); font-style: italic;">Your portfolio goes only to the AI assistant you chose. This page never sees or stores it.</p>
+</section>
+
+<hr class="divider">
+
+<section>
+  <h2>What you'll receive</h2>
+  <p>A full alignment report that includes:</p>
+  <ul>
+    <li>Preliminary assessments — correlation regime, liquidity tiers, currency exposure, concentration checks</li>
+    <li>Scoring against each of the five frameworks, with red and green flags identified</li>
+    <li>A prioritized action list ranked by cross-framework impact</li>
+    <li>Drawdown stress tests against historical scenarios</li>
+    <li>Tax location recommendations, if you are a US taxpayer and included account names</li>
+  </ul>
+  <p class="hint" style="font-size: 0.875rem; color: var(--ink-faint); font-style: italic;">This is educational analysis, not personalized financial advice. The analyzer never recommends specific securities — only allocation categories and portfolio construction principles.</p>
+</section>
+
+</div>
+
+<footer>
+  Last updated April 2026 · Built for the curious investor
+</footer>
+
+<script>
+// Raw URL for the analyzer prompt on GitHub.
+// Cache-busting via ?t=timestamp forces a fresh fetch on each page load.
+const ANALYZER_URL = 'https://raw.githubusercontent.com/markcrobinson1955/invest/main/PORTFOLIO-ANALYZER-PROMPT.md';
+
+const loader = document.getElementById('loader');
+const readyPanel = document.getElementById('readyPanel');
+const errorPanel = document.getElementById('errorPanel');
+const copyBtn = document.getElementById('copyBtn');
+const retryBtn = document.getElementById('retryBtn');
+const statusEl = document.getElementById('status');
+const versionInfo = document.getElementById('versionInfo');
+const errorMessage = document.getElementById('errorMessage');
+
+let analyzerPrompt = null;
+
+function showLoader() {
+  loader.style.display = 'flex';
+  readyPanel.classList.remove('visible');
+  errorPanel.classList.remove('visible');
+}
+
+function showReady() {
+  loader.style.display = 'none';
+  readyPanel.classList.add('visible');
+  errorPanel.classList.remove('visible');
+}
+
+function showError(msg) {
+  loader.style.display = 'none';
+  readyPanel.classList.remove('visible');
+  errorPanel.classList.add('visible');
+  if (msg) errorMessage.textContent = msg;
+}
+
+function extractVersion(text) {
+  // Look for "Analyzer last updated:" line in the prompt
+  const match = text.match(/Analyzer last updated:\s*([^\n]+)/i);
+  return match ? match[1].trim() : null;
+}
+
+function showStatus(message, isError = false) {
+  statusEl.textContent = message;
+  statusEl.classList.toggle('error', isError);
+  statusEl.classList.add('visible');
+  setTimeout(() => statusEl.classList.remove('visible'), 3500);
+}
+
+async function fetchAnalyzer() {
+  showLoader();
+  try {
+    const url = `${ANALYZER_URL}?t=${Date.now()}`;
+    const response = await fetch(url, { cache: 'no-store' });
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+    const text = await response.text();
+    if (!text || text.length < 500) {
+      throw new Error('Fetched content looks incomplete');
+    }
+    analyzerPrompt = text;
+    const version = extractVersion(text);
+    if (version) {
+      versionInfo.textContent = `Analyzer version: ${version}`;
+    } else {
+      versionInfo.textContent = '';
+    }
+    showReady();
+  } catch (err) {
+    console.error('Fetch failed:', err);
+    showError(`The analyzer couldn't be loaded from GitHub (${err.message}). This usually means GitHub is temporarily unreachable or your connection dropped.`);
+  }
+}
+
+async function copyPrompt() {
+  if (!analyzerPrompt) {
+    showStatus('Analyzer not loaded yet.', true);
+    return;
+  }
+  try {
+    await navigator.clipboard.writeText(analyzerPrompt);
+    const wordCount = analyzerPrompt.split(/\s+/).length;
+    showStatus(`Copied (${wordCount.toLocaleString()} words). Paste into your assistant.`);
+  } catch (err) {
+    // Fallback for browsers that block clipboard API
+    const textarea = document.createElement('textarea');
+    textarea.value = analyzerPrompt;
+    textarea.style.position = 'fixed';
+    textarea.style.left = '-9999px';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand('copy');
+      showStatus('Copied. Paste into your assistant.');
+    } catch (e) {
+      showStatus('Copy failed — please try a different browser.', true);
+    }
+    document.body.removeChild(textarea);
+  }
+}
+
+copyBtn.addEventListener('click', copyPrompt);
+retryBtn.addEventListener('click', fetchAnalyzer);
+
+// Kick off the fetch on page load
+fetchAnalyzer();
+</script>
+</body>
+</html>
