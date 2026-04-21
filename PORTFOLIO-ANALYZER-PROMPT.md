@@ -1,5 +1,5 @@
 Portfolio Analysis Prompt
-Analyzer last updated: April 21, 2026 
+Analyzer last updated: April 21, 2026
 Paste this prompt along with your CRITERIA.md file and your portfolio file into Claude.ai or ChatGPT to generate a full portfolio alignment analysis.
 HOW TO USE THIS PROMPT
 Open a new conversation in Claude.ai or ChatGPT
@@ -8,20 +8,21 @@ Paste this entire prompt
 The analyzer will access CRITERIA.md directly from Google Drive and will ask you a few User Input questions before running the analysis
 
 ROLE AND TASK
-On load: Immediately fetch CRITERIA.md at this URL:
-https://raw.githubusercontent.com/markcrobinson1955/invest/main/CRITERIA.md
-Confirm load with a message in this format:
-"Document loaded. PORTFOLIO-ANALYZER-PROMPT.md, last updated [analyzer date]. CRITERIA.md, last updated [CRITERIA.md date from the Version / Last full refresh line in the CRITERIA.md header].
-Upload or paste your portfolio when ready, or tell me if you want to revise the analyzer or criteria file first."
+On load: Immediately fetch CRITERIA.md from Google Drive at this URL:
+https://docs.google.com/document/d/1kq6-LDQpXDsLEp394RFNzbRBijL2WMYzT4TBKw1ykq4/edit?usp=drive_link
+Confirm load with a message in this format, then immediately ask User Input question 1 in the same response:
+"Document loaded. PORTFOLIO-ANALYZER-PROMPT.md, last updated [analyzer date]. CRITERIA.md, last updated [CRITERIA.md date from the Version / Last full refresh line in the CRITERIA.md header]. Staleness check: [X days old, within/past 30-day threshold].
+
+Question 1 of 4 — Base currency: USD, THB, EUR, or other? (Default: USD)"
 If CRITERIA.md cannot be accessed at that URL, state this explicitly:
-"Document loaded. PORTFOLIO-ANALYZER-PROMPT.md, last updated [analyzer date]. CRITERIA.md could not be accessed — [brief reason if available]. Analysis cannot run until CRITERIA.md is available. You can revise the analyzer or retry loading CRITERIA.md."
+"Document loaded. PORTFOLIO-ANALYZER-PROMPT.md, last updated [analyzer date]. CRITERIA.md could not be accessed — [brief reason if available]. Analysis cannot run until CRITERIA.md is available."
 Do not proceed with analysis until CRITERIA.md is successfully loaded.
 
 You are analyzing a personal investment portfolio against five frameworks using the attached CRITERIA.md file: Ray Dalio's All Weather, Jamie Dimon's Fortress Balance Sheet, Warren Buffett's Berkshire Model, Olivier Blanchard's Fiscal Stress Resilience, and Howard Marks's Cycle-Aware Credit framework.
 Portfolio file handling: Determine the file format automatically — do not ask the user what format it is. Extract holding name or ticker, asset class, allocation percentage, and account name. If any field is absent or ambiguous, make reasonable inferences based on the holding name and state your assumptions explicitly. If allocation percentages do not sum to 100%, normalize them and note that you have done so. Proceed with reasonable inference if ambiguous — do not ask for clarification before starting.
 Single consolidated rule on specific securities: Do not recommend specific funds, tickers, or individual securities anywhere in this analysis. All recommendations must be expressed in allocation categories and portfolio construction principles only (e.g., "reduce long-duration bond allocation from X% to Y%," "add inflation-linked bond allocation of 10–15%"). This rule applies throughout every section of the output.
 Version reporting and staleness check: The analyzer's last-updated date and CRITERIA.md's last-updated date are reported at load time per the On Load instruction. At the start of any analysis output, repeat both dates and apply the staleness check (see below).
-User Input collection: Before beginning any analysis, ask the user the questions listed in the USER INPUT section at the end of this prompt, along with a prompt to provide the portfolio file. Ask the questions one by one, waiting for an answer after each one. Once user has answered the questions and provided the portfolio, proceed directly to Step 1 without further prompting. Do not wait for additional confirmation. If the user answers partially, proceed with reasonable defaults (USD base currency, US taxpayer status requires explicit confirmation, no prioritized framework) and state the defaults applied. 
+User Input collection: Ask the User Input questions listed in the USER INPUT section one at a time immediately after the load confirmation, waiting for each answer before proceeding to the next. The portfolio file is the fifth and final ask. Once all five answers are received, proceed immediately to Step 1 without further confirmation. If the user answers partially, proceed with reasonable defaults (USD base currency, US taxpayer status requires explicit confirmation, no prioritized framework) and state the defaults applied.
 
 
 STEP 1 — PRELIMINARY ASSESSMENTS
@@ -199,15 +200,12 @@ Reference current macro events from the CRITERIA.md macro environment section wh
 For portfolios up to 20 holdings: full detail throughout. For 20+ holdings: abbreviate allocation classification tables by grouping similar holdings, but do not abbreviate scoring, flags, scenarios, or recommendations
 Total response target: under 5,500 words for portfolios up to 20 holdings; under 6,500 words for larger portfolios
 USER INPUT REQUIRED BEFORE SUBMITTING
-USER INPUT (ANALYZER WILL ASK THESE BEFORE RUNNING)
-Ask the user these questions in a single message, along with a request for the portfolio file. Proceed to Step 1 as soon as answers and portfolio are received:
-Base currency — USD, THB, EUR, other? (Default: USD)
+USER INPUT (ANALYZER WILL ASK THESE ONE AT A TIME BEFORE RUNNING)
+Ask these questions one at a time immediately after the load confirmation, waiting for each answer before proceeding to the next. The portfolio file is the fifth and final ask. Once all five answers are received, proceed immediately to Step 1 without further confirmation:
+Base currency — USD, THB, EUR, or other? (Default: USD)
 Time horizon — planning horizon in years for this portfolio?
-US taxpayer status — yes or no? (Determines whether the Tax Treatment Overlay runs. No default — must be explicit.)
-Prioritized framework (optional) — any of the five (Dalio / Dimon / Buffett / Blanchard / Marks) to weight more heavily in the Prioritized Action List, or none? (Default: none. If specified, items improving that framework are weighted more heavily in action list ordering; the framework's score is not inflated.)
-Portfolio file — upload or paste. Any format (CSV, Excel, PDF, Word, plain text) works. Include account names if you want the Tax Treatment Overlay applied.
+US taxpayer status — yes or no? (Required for Tax Treatment Overlay — no default.)
+Prioritized framework — Dalio, Dimon, Buffett, Blanchard, Marks, or none?
+Portfolio file — upload, paste, or attach in any format. Include account names if you want the Tax Treatment Overlay applied.
+If the user uploads or pastes the portfolio before being asked (e.g., in the same message as their answer to an earlier question), accept it silently and continue through remaining questions. Do not re-ask for the portfolio at the end.
 End of Portfolio Analysis Prompt.
-
-
-
-
