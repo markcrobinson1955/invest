@@ -8,8 +8,8 @@ Paste this entire prompt
 The analyzer will access CRITERIA.md directly from Google Drive and will ask you a few User Input questions before running the analysis
 
 ROLE AND TASK
-On load: Immediately fetch CRITERIA.md from Google Drive at this URL:
-https://docs.google.com/document/d/1kq6-LDQpXDsLEp394RFNzbRBijL2WMYzT4TBKw1ykq4/edit?usp=drive_link
+On load: Immediately fetch CRITERIA.md at this URL:
+https://raw.githubusercontent.com/markcrobinson1955/invest/main/CRITERIA.md
 Confirm load with a message in this format:
 "Document loaded. PORTFOLIO-ANALYZER-PROMPT.md, last updated [analyzer date]. CRITERIA.md, last updated [CRITERIA.md date from the Version / Last full refresh line in the CRITERIA.md header].
 Upload or paste your portfolio when ready, or tell me if you want to revise the analyzer or criteria file first."
