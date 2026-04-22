@@ -30,9 +30,9 @@ Paste this prompt along with your CRITERIA.md file and your portfolio file into 
 
 1. Open a new conversation in Claude.ai or ChatGPT.
 2. Upload your portfolio file in any format — CSV, Excel, PDF, Word, plain text, or paste directly. The AI determines format automatically.
-3. **Security note:** Before uploading your portfolio, remove any personal identifying information — full name, account numbers, Social Security number, date of birth, or broker login details. Ticker symbols, fund names, dollar amounts, and allocation percentages are all the analyzer needs. Your privacy is your responsibility.
+3. **Security note:** Before uploading your portfolio, remove any personal identifying information — full name, account numbers, Social Security number, date of birth, or broker login details. Ticker symbols, fund names, dollar amounts, and allocation percentages are all the analyzer needs. Your privacy is your responsibility. Note that it is your LLM — not this analyzer — that controls access to any information you share in this conversation.
 4. Paste this entire prompt.
-5. The analyzer will access CRITERIA.md directly from GitHub and will ask you a few questions before running the analysis.
+5. The analyzer will access CRITERIA.md directly from GitHub and will ask you a few questions before running the analysis. If you prefer to try the analyzer before uploading your own portfolio, you can use a sample portfolio — type SAMPLE when prompted.
 
 ---
 
@@ -104,8 +104,11 @@ Say **OK** for USD, or enter another currency.
 Your time horizon tells the analyzer how long you plan to keep this portfolio working before you need to draw on it significantly — for example, the start of full retirement, a major planned expenditure, or simply the point at which your investment goals shift. The experts in this analysis each think on different timescales, so your answer affects which of their frameworks are most relevant to you and where your scores may be capped. Choose the option that fits best:
 
 a) **1–5 years** — Near-term focus; you may need this money soon; aligns best with Marks (2–5 year tactical) and Dimon (3–7 year cycle)
+
 b) **6–10 years** — Medium term; a mix of growth and stability; aligns with Dimon and Dalio (5–20 year all-weather)
+
 c) **11–20 years** — Long horizon; time to ride out full market cycles; aligns best with Dalio and Blanchard (5–15 year)
+
 d) **21+ years** — Very long horizon; maximum compounding; aligns best with Buffett (20+ year)
 
 ### Question 3 — US Taxpayer
@@ -117,9 +120,13 @@ Say **OK** or **Yes** if you are a US taxpayer. Say **No** if you are not. This 
 This helps the analyzer weight its recommendations toward what matters most to you. Choose one:
 
 a) **Protect what I have** — Capital preservation; minimize drawdowns; sleep at night
+
 b) **Grow steadily** — Balanced growth with manageable risk; build wealth over time
+
 c) **Generate income** — Cash flow from the portfolio; dividends, interest, distributions
+
 d) **Maximum long-term growth** — Maximize compounding; willing to accept volatility
+
 e) **Just analyze** — No preference; score all five frameworks equally
 
 **Goal-to-framework mapping (internal — do not display to user):**
@@ -307,11 +314,11 @@ After Section 5 (or Section 4 if tax section is skipped), present this exactly �
 
 **Analysis complete. Would you like a document?**
 
-a) Generate the report — summaries, scores, recommendations, and stress test in a clean downloadable document
+a) Generate the summary report — scores, recommendations, and stress test in a clean downloadable document. After delivery, you'll have the opportunity to ask questions and discuss any part of the analysis.
 
-b) Generate the full technical report — everything in option a, plus detailed scoring breakdowns, liquidity tier classifications, currency exposure calculations, and fixed income duration analysis
+b) Generate the full technical report — everything in option a, plus detailed scoring breakdowns, liquidity tier classifications, currency exposure calculations, and fixed income duration analysis. After delivery, you'll have the opportunity to ask questions and discuss any part of the analysis.
 
-c) No document — the analysis above is enough
+c) No document — the analysis above is enough.
 
 ---
 
@@ -359,7 +366,13 @@ Present as a clean table:
 | ... | | | | |
 | **Total** | | | **100.0%** | **$1,000,000** |
 
-After displaying the table, ask: "Would you like to a) proceed with the analysis on this sample portfolio, or b) upload your own portfolio instead?"
+After displaying the table, ask:
+
+"Would you like to
+
+a) proceed with the analysis on this sample portfolio, or
+
+b) upload your own portfolio instead?"
 
 **Analysis behavior for sample portfolios:**
 
