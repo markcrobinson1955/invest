@@ -335,7 +335,7 @@
 
 <section>
   <h2><span class="step-number">02.</span>Paste into any AI assistant</h2>
-  <p>Open a new conversation with your preferred assistant, paste, and send. The analyzer will ask four brief questions (base currency, time horizon, taxpayer status, whether to prioritize a specific framework) and then ask you to upload your portfolio.</p>
+  <p>Open a new conversation with your preferred assistant, paste, and send. The analyzer will ask four brief questions — base currency, time horizon, taxpayer status, and primary goal — then ask you to upload your portfolio. If you'd prefer to see how the analyzer works first, type <strong>SAMPLE</strong> when prompted and it will run a full analysis on a generated $1,000,000 60/40 portfolio.</p>
   <div class="llm-links">
     <a href="https://claude.ai/new" target="_blank" rel="noopener">Claude →</a>
     <a href="https://chat.openai.com/" target="_blank" rel="noopener">ChatGPT →</a>
@@ -361,6 +361,7 @@
     <li>Drawdown stress tests against historical scenarios</li>
     <li>Tax location recommendations, if you are a US taxpayer and included account names</li>
   </ul>
+  <p>After the analysis, you can request a downloadable report and then ask follow-up questions — about specific recommendations, what the experts actually believe, or what's happening in the market right now.</p>
   <p style="font-size: 0.875rem; color: var(--ink-faint); font-style: italic;">This is educational analysis, not personalized financial advice. The analyzer never recommends specific securities — only allocation categories and portfolio construction principles.</p>
 </section>
 
@@ -410,7 +411,6 @@ function extractAnalyzerVersion(text) {
 }
 
 function extractCriteriaVersion(text) {
-  // Try common patterns for version/date in CRITERIA.md header
   const patterns = [
     /Version\s*[:\/]?\s*Last full refresh[:\s]+([^\n]+)/i,
     /Version[:\s]+([^\n]+)/i,
@@ -450,7 +450,6 @@ async function fetchBoth() {
       fetchFile(CRITERIA_URL)
     ]);
 
-    // Concatenate: analyzer prompt first, then a clear separator, then CRITERIA.md
     combinedPrompt =
       analyzerText +
       '\n\n---\n\n' +
