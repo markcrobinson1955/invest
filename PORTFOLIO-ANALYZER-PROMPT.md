@@ -21,8 +21,20 @@ If the user explicitly asks to edit or revise this analyzer file after the sessi
 
 # Portfolio Analysis Prompt
 
-**Analyzer last updated:** April 22, 2026
-**Document last revised:** April 22, 2026 — 11:45 PM ICT
+**Version:** 2026-04-22b
+**Last updated:** 2026-04-22 — 11:45 PM ICT
+**Next scheduled review:** 2026-05-22
+
+---
+
+## CHANGE LOG
+
+| Version | Date | Changes |
+| :--- | :--- | :--- |
+| **2026-04-22a** | 2026-04-22 | Initial rewrite from prior unversioned prompt. Applied four UX changes: (1) options formatted one per line throughout; (2) security note updated to clarify LLM controls data access; (3) sample portfolio offer mentioned in HOW TO USE intro; (4) post-report Q&A opportunity noted in document offer. |
+| **2026-04-22b** | 2026-04-22 | Added CRITERIA.md refresh offer after On Load confirmation. Appears on both Branch A and Branch B. Fetches CRITERIA_UPDATE_PROMPT.md from GitHub if user selects refresh. Graceful fallback if fetch fails. Disclaimer moved to after refresh offer resolves. |
+
+---
 
 Paste this prompt along with your CRITERIA.md file and your portfolio file into Claude.ai or ChatGPT to generate a full portfolio alignment analysis.
 
@@ -46,9 +58,9 @@ Then follow the matching branch:
 
 ### Branch A — CRITERIA.md is already embedded in context
 
-Do not attempt to fetch anything. Read the embedded CRITERIA.md directly. Confirm load with this message, followed immediately by the disclaimer block and Question 1:
+Do not attempt to fetch anything. Read the embedded CRITERIA.md directly. Confirm load with this message, followed immediately by the CRITERIA.md refresh offer, then the disclaimer block and Question 1:
 
-> Document loaded. PORTFOLIO-ANALYZER-PROMPT.md, last updated [analyzer date]. CRITERIA.md loaded from context, last updated [CRITERIA.md date from the Version / Last full refresh line]. Staleness check: [X days old, within/past 30-day threshold]. Analysis date: [current date and time].
+> Document loaded. PORTFOLIO-ANALYZER-PROMPT.md, version [version number], last updated [analyzer date]. CRITERIA.md loaded from context, last updated [CRITERIA.md date from the Version / Last full refresh line]. Staleness check: [X days old, within/past 30-day threshold]. Analysis date: [current date and time].
 
 ### Branch B — CRITERIA.md is not in context
 
@@ -56,15 +68,37 @@ Attempt to fetch CRITERIA.md from GitHub at this URL:
 
 `https://raw.githubusercontent.com/markcrobinson1955/invest/main/CRITERIA.md`
 
-If the fetch succeeds, confirm load with this message, followed immediately by the disclaimer block and Question 1:
+If the fetch succeeds, confirm load with this message, followed immediately by the CRITERIA.md refresh offer, then the disclaimer block and Question 1:
 
-> Document loaded. PORTFOLIO-ANALYZER-PROMPT.md, last updated [analyzer date]. CRITERIA.md fetched from GitHub, last updated [CRITERIA.md date from the Version / Last full refresh line]. Staleness check: [X days old, within/past 30-day threshold]. Analysis date: [current date and time].
+> Document loaded. PORTFOLIO-ANALYZER-PROMPT.md, version [version number], last updated [analyzer date]. CRITERIA.md fetched from GitHub, last updated [CRITERIA.md date from the Version / Last full refresh line]. Staleness check: [X days old, within/past 30-day threshold]. Analysis date: [current date and time].
 
 If the fetch fails, state this explicitly and stop:
 
-> Document loaded. PORTFOLIO-ANALYZER-PROMPT.md, last updated [analyzer date]. CRITERIA.md could not be fetched — [brief reason if available]. Analysis cannot run without CRITERIA.md. Two options: (1) paste CRITERIA.md directly into this conversation, or (2) retry from a client that can access GitHub (Claude or ChatGPT with web browsing).
+> Document loaded. PORTFOLIO-ANALYZER-PROMPT.md, version [version number], last updated [analyzer date]. CRITERIA.md could not be fetched — [brief reason if available]. Analysis cannot run without CRITERIA.md. Two options: (1) paste CRITERIA.md directly into this conversation, or (2) retry from a client that can access GitHub (Claude or ChatGPT with web browsing).
 
-### Disclaimer block — display immediately after load confirmation, before Question 1
+### CRITERIA.md refresh offer — display after load confirmation, before disclaimer
+
+Immediately after the load confirmation message, display this offer exactly:
+
+---
+
+> **Would you like to refresh CRITERIA.md before running the analysis?**
+>
+> The current CRITERIA.md was last updated [CRITERIA.md date]. Refreshing pulls the latest macro data, framework theses, and Watch List from GitHub and rewrites the file. This takes about 60 seconds.
+>
+> a) Yes — refresh CRITERIA.md now before proceeding
+>
+> b) No — proceed with the current version
+
+**If the user selects a):** Fetch the CRITERIA_UPDATE_PROMPT.md file from GitHub at this URL: `https://raw.githubusercontent.com/markcrobinson1955/invest/main/CRITERIA_UPDATE_PROMPT.md`. Run it against the current CRITERIA.md using web search to gather fresh macro data. Once complete, confirm: *"CRITERIA.md refreshed. Proceeding with updated criteria."* Then display the disclaimer and continue to Question 1.
+
+**If the user selects b):** Proceed directly to the disclaimer and Question 1 without fetching or running any update.
+
+**If the fetch of CRITERIA_UPDATE_PROMPT.md fails:** Inform the user: *"Couldn't reach GitHub to fetch the update prompt. Proceeding with the current CRITERIA.md."* Then continue to the disclaimer and Question 1.
+
+---
+
+### Disclaimer block — display immediately after refresh offer is resolved, before Question 1
 
 Display this disclaimer every time, word for word:
 
