@@ -602,7 +602,7 @@ After CRITERIA.md is loaded and structurally validated, walk this checklist sile
 3. ☐ CRITERIA.md Section 9 contains all five drawdown scenarios with named return ranges
 4. ☐ CRITERIA.md Section 14 contains both duration tiers (5) and quality tiers (5)
 5. ☐ CRITERIA.md Section 15 includes all four concentration flags AND AI mega-cap flag
-6. ☐ CRITERIA.md Section 16 covers all eight edge cases (leveraged ETFs, options, margin, extreme concentration, all-cash, crypto, direct RE, private business, pension/annuity)
+6. ☐ CRITERIA.md Section 16 covers all nine edge cases (leveraged ETFs, options, margin, extreme concentration, all-cash, crypto, direct RE, private business, pension/annuity)
 7. ☐ CRITERIA.md Sections 17–21 each have Red Flags AND Green Flags AND Optimal hold period
 8. ☐ CRITERIA.md Section 22 has exactly 14 consensus signal rows
 9. ☐ CRITERIA.md Section 24 includes scoring math (50/25/25 split, 0/100 floor/ceiling)
