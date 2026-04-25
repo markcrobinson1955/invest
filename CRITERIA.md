@@ -1,6 +1,6 @@
 # Portfolio Alignment Criteria File
 
-*Version: 2026-04-25a*
+*Version: 2026-04-25b*
 
 *Last full refresh: 2026-04-25*
 
@@ -16,6 +16,7 @@
 | 2026-04-20 | 2026-04-20a | Audit remediation; system-defined editorial labels and graduated horizon caps. |
 | 2026-04-22 | 2026-04-22a | Full refresh. Updated macro environment, framework theses, Watch List. |
 | 2026-04-25 | 2026-04-25a | Full refresh. Updated US debt $39.5T → $39.0T (Treasury, April 1) and removed [verify] tag. Updated tariff status: SCOTUS Feb 20 ruling; Section 122 10% in effect since Feb 24, expires July 23/24, 2026; states' suit filed March 5; 60+ Section 301 investigations launched March 11–12. Updated Strait of Hormuz: effectively closed since Feb 28; US Navy blockade of Iranian ports since April 13; "dual blockade" in place. Updated CPI 3.1%/3.4% → 3.3%/2.6% (BLS March, released April 10). Updated unemployment 4.1% → 4.3% (BLS March). Updated S&P 7,165 (record); Nasdaq 24,836 (record); Dow 49,231; VIX 18.71. Updated DXY 104.8 → 98.51. Updated gold $2,420 → ~$4,720 (LBMA/spot April 24) — significant correction; prior figure was understated. Updated BTC ~$77,500. Added Iran war energy shock impact on March CPI. Updated Buffett: Q4 2025 13F was Buffett's final quarter; Abel CEO, Weschler running portfolio (formalized Jan 2026); Berkshire cash $373.3B (Q4 2025 10-K) replaces $190B prior figure. Updated Dimon: April 6 annual letter to shareholders cites geopolitics/AI/Basel 3/inflation persistence; Q1 2026 net income $16.5B. Updated Marks: April 9 memo "What's Going On in Private Credit"; Oaktree AUM $200B [verify] → $223B (Investor Daily April 13). Resolved Watch List items 6 (mBridge — carried forward; no Phase 3 milestone yet), Buffett transition formalized. Added Watch List items for Strait of Hormuz peace talks, FOMC April 28-29, Iran ceasefire status, Berkshire Annual Meeting May 19, USTR Section 301 hearings April 28 / May 5. Restored 14-row Consensus Signals table per analyzer STEP 5.1 (prior table had 6 rows). Restored five-regime taxonomy in Section 5 per analyzer STEP 1A. Restored Green Flags subsections to Sections 17–21 per analyzer STEP 2.4. Added Earnings Yield vs Credit Yield Snapshot updates with current Iran war regime context. |
+| 2026-04-25 | 2026-04-25b | Full structural and content refresh per CRITERIA.md Update Prompt 2026-04-25b. Section count expanded 24 → 25. Added Section 25 (Benchmark Portfolios). Section 9 expanded from 3 to 5 named drawdown scenarios per analyzer STEP 4 (added Dalio Debt Collapse and Marks Credit Boom). Section 16 expanded from 4 to 9 edge-case categories (added Margin/Negative Cash, All-Cash Portfolio, Crypto, Direct Real Estate, Private Business; expanded Pension/Annuity). Section 15 added AI Mega-Cap Concentration Flag. Sections 17–21 each gained "Optimal hold period" line. Section 24 added explicit 50/25/25 scoring math, 0/100 floor/ceiling, cap interaction rule with naming requirement. Berkshire Annual Meeting date corrected May 19 → May 2 (prior file had wrong date; verified via Berkshire 2026 proxy and CNBC live coverage). Removed [verify] tags on US IG yield (now 5.03% confirmed primary source ICE BofA via FRED, April 23) and US HY yield (now 6.79% confirmed primary source ICE BofA via FRED, April 23) — both materially below prior estimates. Updated private credit stress: Moody's revised BDC outlook to negative April 7; Blue Owl Q1 redemption requests 21.9% (OCIC) / 40.7% (OTIC) capped at 5%; Apollo 11.2% requests fulfilled at ~45%; Morgan Stanley North Haven 5% cap; sector-wide ~$20B redemption requests with ~53% fulfilled. Added significant-event flags for: Strait of Hormuz partial reopening then re-closing April 17–18; Berkshire structural changes (Todd Combs leaving for JPM, Kraft Heinz $8B stake under review, Charles Chang new CFO); Kevin Warsh Fed Chair Senate hearing April 21; Section 122 CIT oral arguments held April 10 (ruling pending); University of Michigan Consumer Sentiment record low 49.8 (April); DOJ ended Powell criminal probe. Watch List rebuilt to 18 items with three-part format (description — category — measurable trigger). |
 
 ---
 
@@ -34,7 +35,7 @@ This file is the primary reference for the Portfolio Analyzer. To update:
 
 ### US Fiscal Position
 *Last updated: 2026-04-25* | *Confidence: High*
-* **National Debt:** $39.0 trillion as of April 1, 2026 (Treasury Debt to the Penny). $39T threshold crossed in early April per JEC projection.
+* **National Debt:** $39.0 trillion crossed approximately April 6, 2026 per JEC projection (Treasury Debt to the Penny dataset updated daily; most recent published reference April 22, 2026).
 * **Deficit:** FY2026 cumulative deficit reached $1.2 trillion at end of March (BPC Deficit Tracker); March 2026 monthly deficit $249B, +2% vs March 2025.
 * **Treasury Auctions:** Bid-to-cover ratios March 2026: 4-week T-bills 3.15, 10-year notes 2.39, 30-year bonds 2.75 (JEC). Series of weak auctions in March; primary dealer take-up of late-March 2-year note auction reached 24%, roughly twice the normal share.
 * **Interest Burden:** Average interest rate on total marketable debt 3.365% as of March 2026. Net interest as a share of outlays projected at 13.95% in FY2026 (CBO).
@@ -43,34 +44,42 @@ This file is the primary reference for the Portfolio Analyzer. To update:
 ### Trade and Geopolitics
 *Last updated: 2026-04-25* | *Confidence: High*
 * **Tariff Authority — SCOTUS Ruling:** Feb 20, 2026, 6-3 decision in *Learning Resources v. Trump* held IEEPA does not authorize presidential tariff imposition. Approximately $160–175B in IEEPA tariffs collected may be subject to refund.
-* **Section 122:** 10% universal baseline tariff in effect since Feb 24, 2026 under Trade Act of 1974 Section 122; expires July 23/24, 2026 unless Congress extends. Trump suggested 15% rate but no executive order issued. 24-state lawsuit challenging Section 122 filed at CIT March 5, 2026.
-* **Section 301:** USTR launched investigations covering 60 economies on forced labor (March 11) and 16 economies on excess capacity (March 12). Hearings: April 28 (forced labor), May 5 (excess capacity).
-* **Iran Conflict — Ongoing:** US-Israeli war that began Feb 28, 2026 (killing of Khamenei) continues. Strait of Hormuz remains effectively closed; "dual blockade" with Iran controlling strait traffic and US Navy blockading Iranian ports since April 13. Eight ships transited April 22, well below pre-war 100+ daily. Iran selectively allowing transit for ships from China, Russia, India, Iraq, Pakistan, Malaysia, Thailand, Philippines. Trump extended Lebanon ceasefire by three weeks on April 24.
+* **Section 122:** 10% universal baseline tariff in effect since Feb 24, 2026 under Trade Act of 1974 Section 122; expires July 24, 2026 unless Congress extends. Trump suggested 15% rate but no executive order issued. Average effective US tariff rate now 11.0% (Yale Budget Lab April 2).
+* **CIT Litigation:** 24-state lawsuit (filed March 5) and Burlap and Barrel v. Trump (filed March 9) consolidated; oral arguments held April 10, 2026 before three-judge panel (Barnett, Kelly, Stanceu). **Ruling pending as of this refresh.**
+* **Section 301:** USTR launched investigations covering 60 economies on forced labor (March 11) and 16 economies on excess capacity (March 12). Public comment closed April 15; ITC hearings: April 28 (forced labor), May 5 (excess capacity).
+* **Iran Conflict — Ongoing:** US-Israeli war that began Feb 28, 2026 (killing of Khamenei) continues. Trump extended Lebanon ceasefire by three weeks on April 24. Ceasefire with Iran extended April 21 pending negotiations; naval blockade of Iranian ports remains in place.
+* **Strait of Hormuz Status:** Iran briefly declared strait open April 17 (oil prices fell 11%); reversed April 18 declaring "strict control" until US lifts blockade. Strait remains effectively closed; ship traffic far below pre-war 100+ daily. "Dual blockade" continues — US Navy on Iranian ports since April 13, Iran controlling Hormuz traffic. Rystad Energy estimates oil flows reach 90% of pre-war levels by July; refinery throughput recovery another two months.
 * **Other Conflicts:** Ukraine attrition continues; tensions with China remain elevated per Dimon annual letter.
 
 ### Private Credit Stress
-*Last updated: 2026-04-25* | *Confidence: Medium-High*
-* **Redemptions:** Wave of redemption requests across BCRED (Blackstone), Apollo, BlackRock, and Ares funds in recent weeks. Gate mechanisms active for two major retail-focused private credit BDCs.
-* **Defaults:** PIK toggle usage continues to rise in software/SaaS mid-market; Marks April 9 memo "What's Going On in Private Credit" highlights direct lending as the sector facing first major test since 2008.
+*Last updated: 2026-04-25* | *Confidence: High*
+* **Moody's BDC Outlook:** Revised stable → **negative** on April 7, 2026, citing liquidity mismatches, elevated leverage, accelerating redemption pressure, and AI as a "disruptive force" placing the sector "on defense."
+* **Q1 2026 Redemption Wave:** Aggregate redemption requests across non-traded BDCs ~$20B; approximately 53% fulfilled, with most funds invoking 5–7% quarterly caps.
+* **Specific Funds:** Blue Owl OCIC (~$36B) received tender requests for 21.9% of shares, capped at 5%; Blue Owl OTIC (~$6B technology-focused) received 40.7% requests, capped at 5%. Apollo Debt Solutions BDC: 11.2% requests, fulfilling ~45% of each redeeming investor. Morgan Stanley North Haven (~$8B): 5% cap. KKR also imposing caps.
+* **Defaults:** Direct lending default rate ~5.6% (Morgan Stanley estimate), with potential to reach 8% — well above 2–2.5% historical average. Morgan Stanley analysts characterize 8% as "significant but not systemic." PIK toggle usage continues to rise in software/SaaS mid-market.
+* **Marks Memo:** Oaktree's April 9 memo "What's Going On in Private Credit" highlights direct lending as the segment facing first major test since 2008; emphasizes liability-side risk from retail/mass-affluent investor base behaving differently from institutional capital under stress.
 * **Regulatory:** SEC scrutiny of valuation fairness in non-traded credit funds continues.
 
 ### Regulatory Watch
 *Last updated: 2026-04-25* | *Confidence: Medium*
 * **Crypto/Stablecoin:** Stablecoin Transparency Act remains in Senate committee.
 * **Banking — Basel 3 Endgame:** Capital re-proposals reduced severity vs 2023 version per Dimon Q1 2026 commentary. Dimon characterized residual rules as "still some aspects that are frankly nonsensical." Final implementation delayed to late 2026.
+* **Fed Chair Nomination:** Kevin Warsh Senate Banking Committee confirmation hearing held April 21, 2026; pledged to uphold monetary policy independence. Confirmation vote pending.
+* **DOJ — Powell:** Department of Justice ended its criminal investigation into Fed Chair Jerome Powell on April 24, 2026 (announced via Pirro), removing a potential political complication.
 
 ### AI Capital Expenditure
 *Last updated: 2026-04-25* | *Confidence: Medium*
 * **Hyperscaler Capex:** Microsoft, Alphabet, Meta, Amazon combined FY2026 capex remains in $400B+ range [verify]; Meta issued $12B in new debt earmarked for compute clusters earlier in 2026.
 * **AI ROI Gap:** Analyst commentary continues to flag disparity between infrastructure spend and direct enterprise AI revenue.
-* **Bubble concern:** Marks recent memo "Is It a Bubble" addressed AI parallels to prior bubbles; Dalio February-March commentary connected AI investment cycle to broader Big Cycle/capital war thesis.
+* **Bubble concern:** Marks's recent memo "Is It a Bubble?" (December 2025) addressed AI parallels to prior bubbles; Dalio February-March commentary connected AI investment cycle to broader Big Cycle/capital war thesis. April 24 session showed AI mega-cap concentration intensifying — Nvidia retook $5T market cap; Intel +23% on earnings beat; semiconductor index 18-day winning streak.
 
 ### Inflation Trajectory
 *Last updated: 2026-04-25* | *Confidence: High*
-* **Headline CPI:** 3.3% YoY in March 2026 (BLS, released April 10), up from 2.4% in February. Largest monthly increase (0.9%) since June 2022.
+* **Headline CPI:** 3.3% YoY in March 2026 (BLS, released April 10), up from 2.4% in February. Largest monthly increase (+0.9% MoM) since June 2022.
 * **Core CPI:** 2.6% YoY in March 2026, +0.2% MoM. Underlying inflation contained.
 * **Drivers:** Iran war energy shock — gasoline +21.2% MoM, energy index +10.9%, accounting for nearly three-quarters of headline increase. Shelter +3.0% YoY; food unchanged MoM.
-* **Fed Outlook:** Markets pricing virtually no probability of move at April 28-29 FOMC; ~26% probability of December 25bp cut, down from earlier two-cut expectation.
+* **Fed Outlook:** Federal funds target range 3.50–3.75% (held since at least January, confirmed at March 17–18 meeting). Markets pricing 99.5% probability of no change at April 28–29 FOMC (Polymarket). March SEP dot plot showed one 25bp cut for 2026; markets now pricing ~26% probability of December cut, down from earlier two-cut expectation. April CPI release scheduled May 12.
+* **Consumer Sentiment:** University of Michigan final April reading 49.8 — lowest in series history (since 1952), surpassing June 2022 pandemic-era low of 50.
 
 ### Labor Market
 *Last updated: 2026-04-25* | *Confidence: High*
@@ -79,6 +88,7 @@ This file is the primary reference for the Portfolio Analyzer. To update:
 * **JOLTS:** 6.9 million openings in February 2026; quits rate 1.9%; hires 4.8M.
 * **Participation:** 61.9% (lowest since November 2021); broader U-6 measure 8.0%.
 * **Wages:** Average hourly earnings +0.2% MoM, +3.5% YoY (lowest annual since May 2021).
+* **April Employment Report:** Scheduled May 8.
 
 ### Market Performance YTD
 *Last updated: 2026-04-25* | *Confidence: High*
@@ -90,18 +100,19 @@ This file is the primary reference for the Portfolio Analyzer. To update:
 * **Crude Oil:** $94–97/bbl WTI (April 24); Brent elevated reflecting Strait closure.
 * **MSCI EAFE YTD:** +6.1%; **MSCI EM YTD:** +10.4% (Wespath April 17).
 * **Forward P/E:** 20.9 (FactSet April 24), above 5-year (19.9) and 10-year (18.9) averages.
+* **AI Mega-Cap Leadership:** Nvidia $5T market cap reclaimed April 24; Intel +23% on earnings; semiconductor index 18-day winning streak. Top 7 mega-caps (NVDA, GOOGL, AAPL, MSFT, AMZN, AVGO, META) approximately 38% of S&P 500 market cap.
 
 ### Dollar and Reserve Currency
 *Last updated: 2026-04-25* | *Confidence: High*
-* **DXY:** 98.51 close April 24, 2026 (down from 104.8 prior file). 52-week range 95.55–101.98.
-* **Gold:** ~$4,720/oz spot April 24 (JM Bullion); LBMA April 16 fix $4,793. Significant upward repricing reflecting Iran war, fiscal concerns, and central bank buying. State Street Monthly Gold Monitor cites US$4,000–4,750 structural floor.
-* **Central Bank Buying:** Continued heavy purchasing from China (~2,309t official reserves), India, Turkey.
+* **DXY:** 98.51 close April 24, 2026. 52-week range 95.55–101.98.
+* **Gold:** $4,722.19/oz spot April 24 (JM Bullion); LBMA April 16 PM fix $4,793.60. State Street Monthly Gold Monitor cites US$4,000–4,750 structural floor.
+* **Central Bank Buying:** Continued heavy purchasing from China (~2,309t official reserves, all-time high), India, Turkey.
 * **10Y Treasury:** ~4.06% (April).
 
 ### De-Dollarization Mechanics
 *Last updated: 2026-04-25* | *Confidence: Medium*
 * **mBridge:** Platform expansion continues; participant count broadening.
-* **BRICS/Bilateral Settlements:** India-UAE oil settlements in non-USD ongoing; sanctions architecture against Russia-facilitating banks expanding.
+* **BRICS/Bilateral Settlements:** India-UAE oil settlements in non-USD ongoing; sanctions architecture against Russia-facilitating banks expanding. Iran war heightened settlement demand on non-USD rails.
 
 ### China and Emerging Markets
 *Last updated: 2026-04-25* | *Confidence: Medium*
@@ -117,12 +128,12 @@ This file is the primary reference for the Portfolio Analyzer. To update:
 
 ### Housing and Commercial Real Estate
 *Last updated: 2026-04-25* | *Confidence: Medium*
-* **Residential:** Transaction volumes ~20% below 5-year average; lock-in effect persistent.
+* **Residential:** Transaction volumes ~20% below 5-year average; lock-in effect persistent. Mortgage rate 6.30% (April 24).
 * **Office CRE:** ~20% Tier 1 vacancy; regional banks increasing 2026 maturity loan-loss provisions; multi-family and office reserves a noted line item in JPM Q1 2026 commentary.
 
 ### Cryptocurrency and Digital Assets
 *Last updated: 2026-04-25* | *Confidence: Medium-High*
-* **Bitcoin:** ~$77,500 (April 24, 2026). Spot ETF inflows in steady-state range [verify].
+* **Bitcoin:** $77,501 (April 24, 2026). Spot ETF inflows in steady-state range [verify].
 * **Stablecoin Market Cap:** Continued growth; legislation pending (see Regulatory Watch).
 
 ### Demographics and Entitlement Trajectory
@@ -136,12 +147,12 @@ This file is the primary reference for the Portfolio Analyzer. To update:
 * **NOAA Hurricane Outlook:** 2026 Atlantic outlook expected late May.
 
 ### Earnings Yield vs Credit Yield Snapshot
-*Last updated: 2026-04-25* | *Confidence: Medium*
+*Last updated: 2026-04-25* | *Confidence: High*
 * **S&P 500 Forward Earnings Yield:** ~4.78% (1 / 20.9 forward P/E from FactSet April 24, 2026).
-* **US Investment-Grade Yield:** ~5.40% [verify] — carry-forward estimate; ICE BofA US Corporate Index YTW not directly retrievable in this refresh.
-* **US High-Yield Yield:** ~8.10% [verify] — carry-forward estimate; ICE BofA US High Yield YTW not directly retrievable.
-* **Spread (Earnings Yield − IG Yield):** ~−0.62%.
-* **Assessment:** Credit continues to offer higher yield than equity on a forward-looking basis, even with equity indexes at record highs. Negative spread continues to favor the **Marks** framework. Caveat: IG and HY yields carry [verify] tags; assessment confidence is Medium until confirmed at next refresh.
+* **US Investment-Grade Yield:** **5.03%** (ICE BofA US Corporate Index Effective Yield, FRED, April 23, 2026). Replaces prior 5.40% [verify] estimate.
+* **US High-Yield Yield:** **6.79%** (ICE BofA US High Yield Index Effective Yield, FRED, April 23, 2026). Replaces prior 8.10% [verify] estimate.
+* **Spread (Earnings Yield − IG Yield):** ~−0.25%.
+* **Assessment:** Credit continues to offer higher yield than equity on a forward-looking basis, even with equity indexes at record highs. Negative spread continues to favor the **Marks** framework (credit > equity in late-cycle posture). The HY-to-IG spread narrowed materially since prior refresh as both yields compressed — consistent with risk-on sentiment despite Iran war regime. Confidence upgraded to High with primary-source confirmation from FRED/ICE BofA.
 
 ---
 
@@ -162,11 +173,11 @@ This file is the primary reference for the Portfolio Analyzer. To update:
     * **Deflationary regime** — growth and inflation falling; nominal bonds outperform; cash and quality bonds primary safety
 
 * **Current Regime Assessment:**
-    * **Current Regime:** Inflationary regime with stagflation risk — energy shock from Iran war driving headline CPI to 3.3%, growth slowing (payrolls volatile, participation at 4-year low), fiscal trajectory deteriorating. Equity at record highs while VIX elevated and gold surging signals regime stress.
+    * **Current Regime:** Inflationary regime with stagflation risk — energy shock from Iran war driving headline CPI to 3.3%, growth slowing (payrolls volatile, participation at 4-year low), fiscal trajectory deteriorating. Equity at record highs while VIX elevated and gold at structural-high $4,722 signals regime stress. UMich consumer sentiment at all-time low (49.8) while indices at records adds divergence signal.
     * **Primary Risk Scenario:** Stagflation (sustained Hormuz disruption + fiscal dominance trigger).
     * **Best Suited:** **Dalio** (gold/commodity/diversification posture) and **Blanchard** (fiscal-stress hedge with TIPS and international).
-    * **Least Suited:** **Buffett** (concentrated US equity exposure at record valuations carries elevated drawdown risk in stagflation).
-    * **Justification:** March 2026 CPI energy-led spike to 3.3%, gold at ~$4,720 (record territory), VIX at 18.71 well above prior reading, and Strait of Hormuz "dual blockade" together signal active inflationary/stagflation regime with fiscal-dominance pressure ($39T debt, weak Treasury auctions, 24% primary dealer take-up on March 2-year note).
+    * **Least Suited:** **Buffett** (concentrated US equity exposure at record valuations carries elevated drawdown risk in stagflation; Forward P/E 20.9 well above 10-year average).
+    * **Justification:** March 2026 CPI energy-led spike to 3.3%, gold at $4,722 (record territory), VIX at 18.71 well above prior reading, Strait of Hormuz "dual blockade" persistent, $39T+ debt with weak Treasury auctions (24% primary dealer take-up on March 2-year note), and UMich sentiment at all-time low together signal active inflationary/stagflation regime with fiscal-dominance pressure.
 
 * **Regime-Weighting Rule:** The analyzer applies 2x weighting to regime-aligned frameworks (Dalio and Blanchard at this refresh) in the regime-weighted summary view. This rule is static.
 
@@ -215,14 +226,63 @@ This file is the primary reference for the Portfolio Analyzer. To update:
 ## SECTION 9 — DRAWDOWN SCENARIO MODELS
 > **DISCLAIMER:** The following models contain wide error bands based on historical return ranges. Real-world results may vary significantly.
 
-1. **2008 Financial Crisis Analog:** -40% Equity, +15% Gold, -10% Real Estate.
-    * *Relevance to 2026:* **High** (unchanged from prior refresh; CRE and private credit stress persist, with Marks April 9 memo and ongoing BDC redemptions reinforcing).
+**Scenario 1 — Inflation Shock (2022 Replay)**
+Trigger: persistent inflation forces rapid rate rises; tariff pass-through; energy spike.
+- US Equities: -20% to -25%
+- Long-duration Bonds: -15% to -25%
+- TIPS: -5% to -10%
+- Commodities: +20% to +40%
+- Gold: +5% to +15%
+- Cash: real loss but nominal preserved
+- *Relevance to 2026:* **High** — March CPI energy shock to 3.3%, Iran war energy disruption, Section 122 tariffs adding 0.5–0.6% to consumer prices, and Fed on extended hold all signal active inflation-shock dynamics.
 
-2. **1970s Stagflation Analog:** -20% Equity, +50% Commodities, -15% Long-Bonds.
-    * *Relevance to 2026:* **High** (escalated from Medium-High; Iran war energy shock pushing March CPI to 3.3%, gold at record ~$4,720, growth slowing). The most directly applicable scenario for current regime.
+**Scenario 2 — Credit Crisis (2008 Replay)**
+Trigger: credit event cascades through leveraged structures; liquidity freezes; correlations rise to 1.
+- US Equities: -40% to -55%
+- Long-duration Treasuries: +15% to +25% (flight to safety)
+- IG Corporate: -10% to -20%
+- High Yield: -25% to -40%
+- Private Credit: -20% to -40% (extended gates)
+- Real Estate: -25% to -40%
+- Gold: +10% to +20%
+- Cash: best protector
+- *Relevance to 2026:* **Medium-High** — Moody's BDC negative outlook, $20B redemption rush with only 53% fulfilled, multiple major BDCs imposing 5% caps (Blue Owl, Apollo, Morgan Stanley, KKR), and Marks April 9 memo flagging direct lending stress test all elevate this scenario relative to prior refresh.
+- Apply post-gate stress tier reclassification per Section 7.
 
-3. **1930s Debt Deflation:** -80% Equity, +20% Cash (Value), -50% Real Estate.
-    * *Relevance to 2026:* **Low** (unchanged; active central bank intervention and inflationary regime make deflation outcome unlikely in near term).
+**Scenario 3 — Extended Stagflation (1970s Replay)**
+Trigger: growth stalls while inflation stays high for years; supply shock plus fiscal expansion.
+- US Equities: -20% to -35% (real terms)
+- Long-duration Bonds: -25% to -40%
+- TIPS: 0% to +10%
+- Commodities: +40% to +80%
+- Gold: +50% to +150%
+- International Equities: mixed; commodity exporters outperform
+- *Relevance to 2026:* **High** — energy shock + slowing growth + fiscal expansion is the textbook stagflation setup; gold already at $4,722 record territory; VIX elevated; consumer sentiment at all-time low while equities at records signals classic late-cycle divergence.
+
+**Scenario 4 — Dalio's Debt Collapse (Fiscal Dominance)**
+Trigger: foreign buyers stop purchasing US Treasuries; failed Treasury auction; credit rating action; dollar reserve share dropping below 50%.
+- Long-duration Bonds: -30% to -50%
+- US Dollar: -20% to -35% in real terms
+- Gold: +50% to +150%
+- Commodities: +30% to +80%
+- US Equities: -30% to -50% in real terms
+- International Equities: mixed (some outperform as dollar weakens)
+- Cash (USD): real loss but nominal preserved
+- TIPS: 0% to +15%
+- Gold and real assets primary protectors.
+- *Relevance to 2026:* **Medium** probability, high consequence — $39T debt crossed; primary dealer take-up at 24% on late-March 2-year auction (twice normal); ~33% of marketable debt rolling within 12 months at elevated rates; central bank gold buying at all-time high; Dalio explicitly placed US in transition from Stage 5 to Stage 6 of Big Cycle (March 14 Fortune commentary). Not base case but tail risk has fattened.
+
+**Scenario 5 — Marks's Credit Boom (Early-Cycle Recovery)**
+Trigger: recession clears excesses, credit spreads blow out, Fed pivots, disciplined buyer with cash and IG credit deploys at peak spreads.
+- IG Corporate: +10% to +20% (price appreciation as spreads tighten 150–300bp)
+- High Yield: +15% to +30%
+- US Equities: +30% to +50% from trough
+- Cash deployed into credit at peak spreads: outsized returns
+- Gold: flat to -10% as risk appetite returns
+- Commodities: mixed
+- Long-duration Treasuries: -5% to -15% as rates normalize
+- Key metric: deployable cash and IG credit allocation.
+- *Relevance to 2026:* **Medium-Low** — current cycle still pre-stress; credit spreads have not yet blown out (IG at 5.03%, HY at 6.79% are tight). This scenario becomes more relevant if Scenario 2 (Credit Crisis) materializes first; possible 2027–2029 window if direct lending stress widens to broader credit per Marks's framework.
 
 ---
 
@@ -261,12 +321,12 @@ This file is the primary reference for the Portfolio Analyzer. To update:
 ## SECTION 13 — MACRO VERIFICATION REQUIREMENTS
 *The following items carry [verify] tags inline in the file and require independent verification at next refresh. This list must match the inline [verify] tags exactly — no orphans in either direction.*
 
-* [verify] US Investment-Grade Yield ~5.40% — appears in Section 4 Earnings Yield vs Credit Yield Snapshot. Carry-forward from prior version; ICE BofA US Corporate Index YTW not retrieved this refresh.
-* [verify] US High-Yield Yield ~8.10% — appears in Section 4 Earnings Yield vs Credit Yield Snapshot. Carry-forward from prior version; ICE BofA US High Yield YTW not retrieved this refresh.
 * [verify] Hyperscaler combined FY2026 capex $400B+ range — appears in Section 4 AI Capital Expenditure. Aggregate figure not directly sourced this refresh.
 * [verify] ECB rate path market expectation (1-2 hikes in 2026) — appears in Section 4 Europe and Japan. Single-source citation; intra-month volatility likely.
 * [verify] Bitcoin spot ETF inflows steady-state — appears in Section 4 Cryptocurrency and Digital Assets. Most recent weekly figures not retrieved.
 * [verify] Bridgewater AUM ~$100B–$150B range — appears in Section 17. Conflicting public estimates; institutional ADV filing not directly retrieved.
+
+*Note: Prior version's [verify] tags on US IG Yield (5.40%) and US HY Yield (8.10%) removed this refresh — both confirmed via FRED ICE BofA primary source (5.03% IG, 6.79% HY as of April 23, 2026). US Debt $39.0T also confirmed via JEC/Treasury and tag removed in 2026-04-25a; remains untagged this refresh.*
 
 ---
 
@@ -282,6 +342,7 @@ This file is the primary reference for the Portfolio Analyzer. To update:
     * Financials > 30% (Banking Stress Risk)
     * REITs > 15% (CRE Stress Risk)
     * Energy > 20% (Commodity Bias)
+* **AI Mega-Cap Concentration Flag:** Top 7 US mega-caps (typically MSFT, AAPL, NVDA, GOOGL, AMZN, META, TSLA — adjust if market cap leadership shifts; current S&P 500 top weights as of January 2026: NVDA, GOOGL, AAPL, MSFT, AMZN, AVGO, META) >25% combined = AI Mega-Cap Concentration Flag. Moderate red flag for Dalio (concentration risk), Buffett (single-sector overweight), Marks (late-cycle equity concentration). Not a flag for Dimon or Blanchard unless additional sector flags compound.
 * **Framework Preference:**
     * **Buffett:** Prefers Financials/Consumer/Energy. Dislikes Tech (traditionally).
     * **Dalio:** Neutral (Equalized risk).
@@ -289,72 +350,84 @@ This file is the primary reference for the Portfolio Analyzer. To update:
 ---
 
 ## SECTION 16 — EDGE-CASE HANDLING
-* **Leveraged ETFs:** Treated as 2x/3x exposure to underlying; liquidity cap at 50%.
-* **Options:** Delta-adjusted exposure used for sector weighting.
+* **Leveraged ETFs:** Treated as 2x/3x exposure to underlying; liquidity cap at 50% of nominal weight; moderate-to-critical red flag depending on size.
+* **Options:** Delta-adjusted exposure used for sector and concentration weighting. Premium-paid options below 1% of portfolio: ignored. Structured/leveraged option positions above 5%: critical red flag.
+* **Margin / Negative Cash:** Critical red flag for all five frameworks. Triggers 50% score cap across all frameworks regardless of size.
 * **Extreme Concentration (Score Caps):**
-    * 25–50% single holding: **70% Score Cap**.
-    * 50–70% single holding: **55% Score Cap**.
-    * Greater than 70% single holding: **40% Score Cap**.
-* **Pension/Social Security:** Treated as Bond-Equivalent (Sovereign IG).
+    * 25–50% single holding: **70% score cap**
+    * 50–70% single holding: **55% score cap**
+    * Greater than 70% single holding: **40% score cap**
+* **All-Cash Portfolio:** Triggers Buffett 50% cap (no productive assets), Dalio 60% cap (no diversification), Marks no cap (cash-as-optionality is consistent with late-cycle posture). Dimon and Blanchard scored normally.
+* **Crypto:** Treated as Tier 4 liquidity (24/7 markets but volatile, custody-dependent). >5% crypto = Buffett moderate red flag, Dimon moderate red flag, Blanchard neutral, Dalio neutral, Marks neutral. >15% crypto = critical red flag for Buffett and Dimon.
+* **Direct Real Estate:** Classified as Tier 5 (illiquid). >40% of net worth in direct real estate = critical red flag for all frameworks (concentration). Operating real estate (rental income) treated separately from primary residence.
+* **Private Business:** Classified as Tier 5 (illiquid). Operating business ownership treated as quality equity exposure for Buffett (potentially green flag if moat-bearing) but as concentration risk for all other frameworks if >30% of net worth.
+* **Pension / Annuity:** Treated as Bond-Equivalent (Sovereign IG duration-matched to expected payout horizon). Defined benefit pension and Social Security counted in fixed income allocation for risk parity purposes.
 
 ---
 
 ## SECTION 17 — FRAMEWORK 1: RAY DALIO
 
-*Source: Bridgewater Daily Observations references; Fortune commentary March 14, 2026; World Governments Summit Dubai February 2-5, 2026; HBR IdeaCast January 20, 2026; Motley Fool/Fortune coverage February 2026.*
+*Source: Bridgewater Daily Observations references; Fortune commentary March 14, 2026; World Governments Summit Dubai February 2-5, 2026; HBR IdeaCast January 20, 2026; All-In Podcast appearance (per HedgeCo Insights March 19, 2026); Motley Fool/Fortune coverage February 2026.*
 
 *Confidence: High.*
 
 * **Who He Is:** Founder of Bridgewater Associates.
+* **Optimal hold period: 5–20 years** (Dalio All Weather is a multi-cycle framework).
 * **Bridgewater AUM:** ~$100B–$150B [verify] [last verified 2026-04-25].
 * **Dalio Net Worth:** ~$14B [last verified 2026-04-25].
 * **Investment Philosophy:** Risk parity. Diversification across "four seasons" of economic growth and inflation.
 * **Target Allocation (System-Constructed Translation):** 30% Stocks, 40% Long-Term Treasuries, 15% Intermediate Treasuries, 7.5% Gold, 7.5% Commodities.
-* **Current Thesis (2026):** Dalio continues warning that the US is in late stages of the Big Debt Cycle, with three converging forces: massive debt/money creation, internal social/political conflict, and external great power conflict. February 2 Dubai speech framed current dynamics as approaching "capital war" stage, with money being weaponized through debt ownership and capital controls. March 14 Fortune commentary explicitly placed US in transition from Stage 5 to Stage 6 ("the war stage") of his Big Cycle. He continues to recommend gold (10–15% allocation per recent commentary) as the primary fiscal-dominance hedge and warns that abundant capital fueling AI build-out could dry up if foreign Treasury demand falters.
-* **Recent Commentary:** "Cash is no longer trash, but debt is a risky hold" (early 2026). On capital war: "We are on the brink. That means not in, but it means we are quite close, and it would be very easy to go over the brink because there are mutual fears" (Feb 4, 2026, World Governments Summit Dubai).
+* **Current Thesis (2026):** Dalio continues warning that the US is in late stages of the Big Debt Cycle, with three converging forces: massive debt/money creation, internal social/political conflict, and external great power conflict. February 2 Dubai speech framed current dynamics as approaching "capital war" stage, with money being weaponized through debt ownership and capital controls. March 14 Fortune commentary explicitly placed US in transition from Stage 5 to Stage 6 ("the war stage") of his Big Cycle. March 19 All-In Podcast appearance (per HedgeCo) connected capital war framework directly to Strait of Hormuz vulnerability and private credit liquidity stress — both materializing in real time this refresh. He continues to recommend gold (10–15% allocation per recent commentary) as the primary fiscal-dominance hedge and warns that abundant capital fueling AI build-out could dry up if foreign Treasury demand falters.
+* **Recent Commentary:** "Cash is no longer trash, but debt is a risky hold" (early 2026). On capital war: "We are on the brink. That means not in, but it means we are quite close, and it would be very easy to go over the brink because there are mutual fears" (Feb 4, 2026, World Governments Summit Dubai). On gold: "Gold is up about 65% from a year ago... when the bad times come along it does uniquely well" (CNBC Feb 2026).
 * **Red Flags:** Dollar over-reliance (>80%); No gold allocation; No commodity allocation; Heavy long-bond concentration without inflation hedge.
 * **Green Flags:** Gold/hard asset allocation 7.5%+; Balanced risk-parity construction; Material non-USD exposure; Inflation-linked bonds present.
 
-*Material change flag: None this refresh. Thesis sharpened but allocation framework unchanged.*
+*Material change flag: None this refresh. Thesis sharpening (capital war framework explicitly tied to Hormuz/private credit) but allocation framework unchanged.*
 
 ---
 
 ## SECTION 18 — FRAMEWORK 2: JAMIE DIMON
 
-*Source: JPMorgan Chase 2025 Annual Report (Letter to Shareholders, April 6, 2026); JPM Q1 2026 8-K earnings release; CNBC, Yahoo Finance, Business Chief coverage of letter.*
+*Source: JPMorgan Chase 2025 Annual Report (Letter to Shareholders, April 6, 2026); JPM Q1 2026 8-K earnings release April 14, 2026; CNBC, Yahoo Finance, Quartz, Investing.com coverage of letter and Q1 results.*
 
 *Confidence: High.*
 
 * **Who He Is:** Chairman and CEO of JPMorgan Chase.
-* **JPMorgan Assets:** ~$4.3T [last verified 2026-04-25]. Q1 2026 results: net income $16.5B, CET1 capital $291B, total loss-absorbing capacity $572B, cash and marketable securities $1.5T.
+* **Optimal hold period: 3–7 years** (Dimon Fortress is cycle-aware quality compounding).
+* **JPMorgan Assets:** ~$4.3T [last verified 2026-04-25]. Q1 2026 results: net income $16.5B, EPS $5.94 (vs $5.45 LSEG estimate), revenue $50.5B (+10% YoY), ROTCE 23%, ROE 19%, CET1 capital $291B, total loss-absorbing capacity $572B, cash and marketable securities $1.5T.
 * **Investment Philosophy:** "Fortress Balance Sheet." High capital ratios, massive liquidity, preparation for tail risks.
 * **Target Allocation (System-Constructed Translation):** 50% High-Quality US Equities, 30% Cash/Short-duration High-Quality Debt, 20% Alternative/Strategic Credit.
-* **Current Thesis (2026):** April 6 annual letter framed "increasing and complex risks": geopolitical conflicts (Ukraine, Iran, Middle East, China), persistent inflation risk, AI-related uncertainty, and "nonsensical" residual capital rules. Dimon explicitly warned that Iran war could push energy/commodity prices higher for longer in ways markets have not fully priced. He emphasizes inflation may be more structural than market expects due to defense spending, deglobalization, and fiscal deficits — preparing JPM for higher-for-longer or surprise spike scenarios.
-* **JPMorgan Credit Book:** Q1 2026 commentary noted normalization of card charge-offs but increased reserves for multi-family and office commercial real estate. CCB revenue +7%; AWM revenue +11% with $54B long-term AUM net inflows; Markets revenue record $11.6B.
-* **Recent Commentary:** "The outcome of current geopolitical events may very well be the defining factor in how the future global economic order unfolds" (April 6, 2026 letter).
+* **Current Thesis (2026):** April 6 annual letter framed "increasingly complex set of risks": geopolitical conflicts (Ukraine, Iran, Middle East, China), persistent inflation risk, AI-related uncertainty, large global fiscal deficits, elevated asset prices, and "nonsensical" residual capital rules. Dimon explicitly warned that a drawn-out Iran war could push energy/commodity prices higher for longer in ways markets have not fully priced — producing "stickier inflation and ultimately higher interest rates." Q1 2026 commentary cited tailwinds (consumer spending resilience, fiscal stimulus, deregulation, AI capex, Fed asset purchases) alongside "increasingly complex" risk environment. Markets revenue record $11.6B; fixed income trading +21% on commodities/credit/FX/EM activity.
+* **JPMorgan Credit Book:** Q1 2026 commentary noted normalization of card charge-offs but increased reserves for multi-family and office commercial real estate. CCB revenue +7% with 450,000 net new checking accounts; AWM revenue +11% with $54B long-term AUM net inflows; M&A advisory fees +82% YoY.
+* **2026 NII Outlook:** Trimmed by $1.5B to $103B (markets-related revision; ex-markets unchanged).
+* **Personnel Note:** Berkshire's Todd Combs is leaving Berkshire to join JPMorgan (per Omaha Magazine April 2026 reporting).
+* **Recent Commentary:** "The outcome of current geopolitical events may very well be the defining factor in how the future global economic order unfolds" (April 6, 2026 letter). On Q1 risks: "geopolitical tensions and wars, energy price volatility, trade uncertainty, large global fiscal deficits and elevated asset prices... we cannot predict how these risks and uncertainties will ultimately play out" (April 14, 2026).
 * **Red Flags:** Private Credit >15%; Margin debt; Tier 5 gated holdings; Cash/T-bills <20%.
 * **Green Flags:** Cash/T-bills >25%; Quality US large-cap equity core; Minimal leverage; Liquid alternatives capped <10%.
 
-*Material change flag: None this refresh. Inflation persistence theme intensified relative to prior refresh.*
+*Material change flag: None this refresh. Inflation persistence theme intensified relative to prior refresh; Iran war explicitly identified as driver of stickier inflation.*
 
 ---
 
 ## SECTION 19 — FRAMEWORK 3: WARREN BUFFETT
 
-*Source: Berkshire Hathaway Q4 2025 10-K; Q4 2025 13F filing (most recent, Buffett's final quarter); MarketWise February 27, 2026; Finviz/Techi March 2026 coverage.*
+*Source: Berkshire Hathaway Q4 2025 10-K; Q4 2025 13F filing (most recent, Buffett's final quarter); Berkshire 2026 proxy (definitive proxy statement, March 13, 2026); Omaha Magazine April/May 2026 coverage; CNBC live coverage of upcoming May 2 meeting.*
 
 *Confidence: High.*
 
-* **Who He Is:** Former Chairman of Berkshire Hathaway. As of January 2026, Greg Abel is CEO; Ted Weschler is managing investment portfolio. Q4 2025 was Buffett's final operational quarter.
-* **Berkshire Cash Position:** $373.3B as of Q4 2025 10-K (peaked $381.7B Q3 2025). Represents historic-high deployable capital under Abel/Weschler.
+* **Who He Is:** Former Chairman/CEO of Berkshire Hathaway. As of January 1, 2026, Greg Abel is CEO; Ted Weschler is managing investment portfolio. Buffett continues as Chairman of the Board with ~30.0% voting interest and 13.7% economic interest. Q4 2025 was Buffett's final operational quarter as CEO.
+* **Optimal hold period: 20+ years** (Buffett "favorite holding period is forever").
+* **Berkshire Cash Position:** $373.3B as of Q4 2025 10-K (peaked $381.7B Q3 2025). Plus ~$300B in securities. Represents historic-high deployable capital under Abel/Weschler.
 * **Investment Philosophy:** Value investing. High-conviction concentration in "moat" businesses at reasonable prices.
 * **Target Allocation (System-Constructed Translation):** 90% Low-cost S&P 500 Index, 10% Short-term Treasuries (for individuals). Berkshire actual: ~30% cash/T-bills, 70% concentrated equities (top: Apple ~228M shares; Q4 increased Chubb +0.59%, Chevron +0.15%, NYT; reduced Amazon -77%, BAC -9%, DaVita).
-* **Current Thesis (2026) — Buffett vs. Abel Divergence:** With formal leadership transition complete, Abel inherits the largest cash pile in corporate history. Markets are watching whether Abel deploys it differently — e.g., toward larger infrastructure/utility positions consistent with his background. Q4 2025 13F shows continued net selling pattern (between 2022–2024 Berkshire sold $172.93B net equities). Iran war-driven March selloff likely created Buffett-criteria opportunities; Abel's deployment cadence in coming quarters will define divergence from Buffett's pattern. Berkshire annual meeting May 19, 2026.
+* **Current Thesis (2026) — Buffett vs. Abel Divergence:** With formal leadership transition complete, Abel inherits the largest cash pile in corporate history. Markets are watching whether Abel deploys it differently — e.g., toward larger infrastructure/utility positions consistent with his BHE background. Q4 2025 13F shows continued net selling pattern (between 2022–2024 Berkshire sold $172.93B net equities). Iran war-driven March selloff likely created Buffett-criteria opportunities; Abel's deployment cadence in coming quarters will define divergence from Buffett's pattern. **Berkshire annual meeting May 2, 2026 (CHI Health Center, Omaha)** — first Abel-led meeting; Buffett attending but seated with directors. Recent structural changes signal Abel willingness to alter long-standing positions: Berkshire considering selling $8B Kraft Heinz stake; Todd Combs leaving for JPMorgan; Charles Chang (former BHE CFO) replacing Marc Hamburg as Berkshire CFO.
 * **Recent Commentary:** Buffett (early 2026): defending cash position publicly, arguing right opportunity at right price had not appeared. Abel: limited public commentary to date.
 * **Red Flags:** Crypto >5% (Buffett historically negative); Margin; >20 distinct equity holdings (Buffett prefers concentration); Gold >5% (Buffett dislikes non-productive assets).
 * **Green Flags:** S&P 500 index core or concentrated US large-cap; Cash/T-bills 20–30%; Demonstrated moat businesses; Minimal turnover.
 
-*Material change flag: YES — leadership transition formalized. Allocation logic continues to apply but "Buffett" thesis now bifurcates between Buffett-historical and Abel-going-forward. Static target allocation should be reviewed at next pass for whether to continue using Buffett's index-and-cash framework or transition toward Abel's emerging pattern.*
+*Material change flag: YES — leadership transition formalized AND structural changes accelerating. Allocation logic continues to apply but "Buffett" thesis now bifurcates between Buffett-historical and Abel-going-forward. Three concrete Abel-era signals this refresh: (1) Kraft Heinz stake under review; (2) Combs departure to JPM; (3) new CFO. Static target allocation should be reviewed after May 2 annual meeting for whether to continue using Buffett's index-and-cash framework or transition toward Abel's emerging pattern.*
+
+*Calendar correction: Prior file listed Berkshire annual meeting as May 19; verified date is May 2, 2026 (Berkshire 2026 proxy and CNBC live coverage). Watch List updated.*
 
 ---
 
@@ -365,9 +438,10 @@ This file is the primary reference for the Portfolio Analyzer. To update:
 *Confidence: Medium.*
 
 * **Who He Is:** Senior Fellow at PIIE; Robert M. Solow Professor of Economics emeritus at MIT; former Chief Economist of the IMF (2008–2015).
+* **Optimal hold period: 5–15 years** (Blanchard fiscal-stress hedge over policy/cycle horizon).
 * **Investment Philosophy:** [System-constructed translation: Blanchard is an academic economist, not a published allocator]. Focuses on fiscal sustainability and the relationship between r (interest rate) and g (growth rate).
 * **Target Allocation (Fiscal Stress Resilience):** 40% Inflation-Protected Securities (TIPS), 30% International Equities (Non-USD), 20% Short-duration Bonds, 10% Real Assets.
-* **Current Thesis (2026):** Blanchard continues focus on fiscal sustainability when r > g, with US trajectory increasingly explosive without primary surplus given $39T debt and weak Treasury auctions. April 2026 PIIE eurozone panel addressed how rising long-term defense commitments and industrial policy expose fiscal architecture weaknesses, with implications for Eurobonds and ECB framework. His recommendation framework continues to favor hedging against fiscal-dominance regime where central bank is pressured to keep rates low to fund government — a scenario the current Iran war energy shock makes more rather than less likely.
+* **Current Thesis (2026):** Blanchard continues focus on fiscal sustainability when r > g, with US trajectory increasingly explosive without primary surplus given $39T+ debt and weak Treasury auctions. April 2026 PIIE eurozone panel addressed how rising long-term defense commitments and industrial policy expose fiscal architecture weaknesses, with implications for Eurobonds and ECB framework. His recommendation framework continues to favor hedging against fiscal-dominance regime where central bank is pressured to keep rates low to fund government — a scenario the current Iran war energy shock makes more rather than less likely. Current macro environment (energy-driven CPI spike, weak auctions, fiscal trajectory deteriorating) increasingly aligned with Blanchard's hedging thesis.
 * **Recent Commentary:** Recent academic emphasis on scope and role of fiscal policy under low (and rising) rate regimes; April 2026 eurozone panel commentary on integration and ECB framework.
 * **Red Flags:** No TIPS allocation; Dollar over-reliance (>75%); High duration without inflation protection; No international equity exposure.
 * **Green Flags:** TIPS allocation 15%+; Material non-USD international equities 25%+; Real assets allocation 10%+; Short-duration bond bias.
@@ -378,20 +452,21 @@ This file is the primary reference for the Portfolio Analyzer. To update:
 
 ## SECTION 21 — FRAMEWORK 5: HOWARD MARKS
 
-*Source: Oaktree memo "What's Going On in Private Credit" (April 9, 2026); Yahoo Finance/Seeking Alpha coverage April 9-10, 2026; Investor Daily April 13, 2026; Apple Podcasts memo log (recent: AI bubble memo, credit memo).*
+*Source: Oaktree memo "What's Going On in Private Credit" (April 9, 2026); Yahoo Finance/Seeking Alpha coverage April 9-10, 2026; Investor Daily April 13, 2026; Brookfield Private Wealth memo log; Apple Podcasts memo log; "Reflections on Oaktree Conference 2026 with Howard Marks" podcast March 24, 2026.*
 
 *Confidence: High.*
 
 * **Who He Is:** Co-founder and Co-Chairman of Oaktree Capital Management.
-* **Oaktree AUM:** ~$223B [last verified 2026-04-25] (up from ~$200B prior file).
+* **Optimal hold period: 2–5 years** (Marks cycle-aware tactical credit).
+* **Oaktree AUM:** ~$223B [last verified 2026-04-25] (up from ~$200B prior file via Investor Daily April 13).
 * **Investment Philosophy:** "Sea Change" — moving from 40-year period of declining rates to a normal rate environment where credit offers equity-like returns with less risk.
 * **Target Allocation Bias (Cycle-Aware Credit):** Overweight Credit (Distressed, Senior Secured) relative to Equities; specific weighting depends on cycle stage assessment.
-* **Current Thesis (2026):** April 9 memo "What's Going On in Private Credit" outlined growing concerns about retail private credit as the sector faces its first major test since 2008. Marks distinguishes direct lending (the segment under stress) from broader private credit and emphasizes liability-side risk: the retail/mass-affluent investor base is structurally different from institutional capital and may behave differently under stress. Oaktree has reduced its direct lending and software exposure below peer levels. Sea Change thesis remains intact: credit can deliver equity-like returns with less risk in current rate environment, especially in distressed and senior secured tranches. Recent memo "Is It a Bubble" addressed AI bubble parallels.
-* **Recent Commentary:** April 9 memo: financial cycles follow predictable patterns; the yield premium on sub-investment grade credit "isn't a freebie, but rather compensation for bearing credit risk." On retail private credit: parallels to 1929 dynamics in the way liability-side capital quality may differ from prior credit cycles.
+* **Current Thesis (2026):** April 9 memo "What's Going On in Private Credit" outlined growing concerns about retail private credit as the sector faces its first major test since 2008. Marks distinguishes direct lending (the segment under stress) from broader private credit and emphasizes liability-side risk: the retail/mass-affluent investor base is structurally different from institutional capital and may behave differently under stress — drawing parallel to 1929 dynamics in capital quality. Oaktree has reduced its direct lending and software exposure below peer levels. Sea Change thesis remains intact: credit can deliver equity-like returns with less risk in current rate environment. April 2026 macro environment validates positioning — Moody's BDC negative outlook April 7 and ~$20B Q1 redemption surge across Blue Owl/Apollo/Morgan Stanley/KKR with only ~53% fulfilled is exactly the sea-change-era stress Marks anticipated.
+* **Recent Commentary:** April 9 memo: financial cycles follow predictable patterns; the yield premium on sub-investment grade credit "isn't a freebie, but rather compensation for bearing credit risk." On retail private credit liability mismatch and structural fragility. Earlier memo "Is It a Bubble?" (December 2025) addressed AI bubble parallels. March 24 Insight podcast "Reflections on Oaktree Conference 2026" covered evolution of credit markets, mispricings, and leadership.
 * **Red Flags:** Covenant-lite private credit concentration; Software/SaaS debt concentration; Retail private credit BDCs exceeding 10%; No credit allocation in late-cycle posture.
 * **Green Flags:** Senior secured credit allocation; Distressed/opportunistic credit exposure; Credit overweight relative to equities in current cycle assessment; Minimal direct lending exposure to software/SaaS.
 
-*Material change flag: None to thesis; AUM updated $200B → $223B.*
+*Material change flag: Thesis validated by current refresh evidence (Moody's negative outlook, redemption surge, Blue Owl/Apollo/MS/KKR caps). AUM updated $200B → $223B confirmed. Marks's cycle warning continues to track real-time data closely.*
 
 ---
 
@@ -419,53 +494,96 @@ Legend: ✓ = recommends / warns in alignment with this signal, ⚠ = warns agai
 
 *Last updated: 2026-04-25*
 
-* **Highest-confidence signals (5/5 unanimous):** Hold significant cash/T-bills; Warning on private credit; Quality over yield; Avoid leverage/complexity. Marks April 9 memo intensified the private credit consensus.
+* **Highest-confidence signals (5/5 unanimous):** Hold significant cash/T-bills; Warning on private credit; Quality over yield; Avoid leverage/complexity. The April 7 Moody's BDC negative outlook and $20B redemption surge intensified the private credit consensus.
 * **Highest-confidence signals (4/5):** International diversification; AI/tech bubble concern; US fiscal sustainability concern.
-* **Change notes — table reconstructed this refresh:** The prior 2026-04-22a table contained 6 rows; the analyzer (PORTFOLIO-ANALYZER-PROMPT.md STEP 5.1) requires 14. Rows reconstructed per prompt specification using framework theses verified this refresh. No cell-level changes are claimed against the prior 6-row table since signal labels do not match. Future refreshes should track cell changes against this 14-row baseline.
+* **Change notes — no cell-level changes this refresh.** The 14-row table established 2026-04-25a remains stable. Underlying evidence has strengthened existing consensus signals (private credit warning sharpened by Marks April 9 memo and Moody's action; fiscal sustainability concern reinforced by $39T crossing and weak auctions) but no framework's binary stance shifted enough to change a cell value.
 
 ---
 
 ## SECTION 23 — CURRENT EVENTS WATCH LIST
-*Items to monitor for the next criteria refresh. Resolved items are removed; pending items are updated; new items are added based on this refresh's research and significant-event flagging.*
+*Items to monitor for the next criteria refresh. Resolved items removed; pending items updated; new items added based on this refresh's research and significant-event flagging.*
 
-1. **FOMC April 28-29 Meeting** — Immediate watch — Rate decision, dot plot update, post-Iran-war guidance.
-2. **Strait of Hormuz Status / Iran Peace Talks (Islamabad)** — Immediate watch — Reopening would trigger oil reset; collapse of talks would extend energy shock to next CPI print.
-3. **Section 122 Tariff Expiration July 23-24** — Regulatory watch — Without congressional extension, 10% baseline tariff lapses; Section 301 results determine successor regime.
-4. **USTR Section 301 Hearings April 28 (forced labor) / May 5 (excess capacity)** — Regulatory watch — Successor architecture for IEEPA-replaced tariffs.
-5. **Berkshire Annual Meeting May 19, 2026** — Criteria refresh — First full Abel-led meeting; capital deployment signals; Buffett valedictory remarks.
-6. **JPM Annual Meeting May 19** — Criteria refresh — Dimon Q&A on inflation, Iran war, Basel 3.
-7. **April CPI Release (May 12)** — Immediate watch — Whether March energy spike is one-shot or feeding through to core.
-8. **April Employment Report (May 8)** — Immediate watch — Labor market response to Iran war disruption.
-9. **24-State Section 122 Lawsuit at CIT** — Regulatory watch — Court ruling could invalidate replacement tariff regime.
-10. **CRE Refinancing Pulse Q2 2026** — Criteria refresh — Regional bank delinquency rates; multi-family/office reserves trajectory at JPM and peers.
-11. **Stablecoin Transparency Act Vote** — Regulatory watch — Senate committee movement; impact on T-bill demand from stablecoin reserves.
-12. **mBridge / BRICS+ Settlement Volumes** — Criteria refresh — Pace of non-USD bilateral settlement growth post-Iran sanctions.
-13. **Ukraine/Russia Ceasefire Path** — Criteria refresh — Impact on European fiscal/defense architecture, energy.
-14. **Trustees Report 2026 (Social Security/Medicare)** — Regulatory watch — Updated depletion projections; political response.
-15. **NOAA 2026 Atlantic Hurricane Outlook (late May)** — Criteria refresh — Insurance market repricing trajectory in FL/CA.
-16. **Howard Marks Next Memo / Oaktree Conference** — Criteria refresh — Cycle-stage update; whether direct-lending stress widens to broader credit.
-17. **Greg Abel Major Capital Deployment Decision** — Criteria refresh — Whether $373B cash pile is deployed differently from Buffett pattern; signal for framework redefinition.
-18. **Bridgewater Q1 13F Filing (mid-May)** — Criteria refresh — Confirms or refines Bridgewater AUM and current positioning vs Dalio public commentary.
+1. **FOMC April 28-29 Meeting** — Immediate watch — Rate decision triggers reassessment if outcome differs from 99.5% Polymarket no-change probability; SEP/dot plot revisions also trigger.
+2. **Strait of Hormuz Status / Iran Ceasefire** — Immediate watch — Reopening with sustained traffic >50 ships/day triggers oil reset and inflation reassessment; ceasefire collapse or renewed kinetic action triggers stagflation scenario escalation.
+3. **CIT Ruling on Section 122 Lawsuits (Burlap and Barrel + States v. Trump)** — Regulatory watch — Ruling that strikes Section 122 triggers refund analysis and successor-tariff reassessment; ruling upholding it locks in tariffs through July 24.
+4. **Section 122 Tariff Expiration July 24, 2026** — Regulatory watch — Lapse without replacement reduces effective tariff rate from 11.0% to 8.2%; extension or replacement under Section 301 triggers macro reassessment.
+5. **USTR Section 301 ITC Hearings April 28 (forced labor) / May 5 (excess capacity)** — Regulatory watch — Successor architecture for IEEPA-replaced tariffs; preliminary findings trigger reassessment of trade and inflation subsections.
+6. **Berkshire Annual Meeting May 2, 2026** — Criteria refresh — First full Abel-led meeting; capital deployment signals (Kraft Heinz disposition, infrastructure pivots); Buffett valedictory remarks; trigger for Buffett-vs-Abel framework bifurcation review.
+7. **JPM Annual Meeting May 19** — Criteria refresh — Dimon Q&A on inflation persistence, Iran war exposure, Basel 3 status, Combs role.
+8. **April CPI Release May 12** — Immediate watch — Headline >3.5% YoY triggers stagflation regime reassessment; core >3.0% YoY triggers Fed reaction function reassessment.
+9. **April Employment Report May 8** — Immediate watch — Payrolls below +50K triggers labor market deterioration concern; unemployment >4.5% triggers stagflation scenario probability bump.
+10. **Kevin Warsh Fed Chair Confirmation Vote** — Regulatory watch — Confirmation triggers reassessment of Fed reaction function; rejection or withdrawal triggers Watch List re-prioritization.
+11. **Howard Marks Next Memo / Oaktree Q2 Conference** — Criteria refresh — Cycle-stage update; whether direct-lending stress widens to broader credit (HY OAS >500bp would be a trigger).
+12. **Greg Abel Major Capital Deployment Decision** — Criteria refresh — Single deployment >$25B triggers Buffett framework redefinition review; Kraft Heinz disposition triggers turnover-tolerance reassessment.
+13. **Bridgewater Q1 13F Filing (mid-May)** — Criteria refresh — Confirms or refines Bridgewater AUM and resolves [verify] tag; positioning shifts vs Dalio public commentary.
+14. **CRE Refinancing Pulse Q2 2026** — Criteria refresh — Regional bank delinquency rate >5% triggers banking stress flag; multi-family/office reserve increase >20% QoQ at JPM peers triggers reassessment.
+15. **Stablecoin Transparency Act Senate Vote** — Regulatory watch — Passage triggers reassessment of T-bill demand from stablecoin reserves and crypto regulatory subsection.
+16. **mBridge / BRICS+ Settlement Volumes** — Criteria refresh — Cross-border settlement growth >50% YoY would trigger de-dollarization escalation; new Phase 3 milestone triggers reassessment.
+17. **Trustees Report 2026 (Social Security/Medicare)** — Regulatory watch — OASI depletion projection moving inside 2030 triggers entitlement-trajectory escalation.
+18. **NOAA 2026 Atlantic Hurricane Outlook (late May) & 2026 Season** — Criteria refresh — Above-normal forecast triggers insurance market repricing escalation in FL/CA; major landfall events trigger physical-risk subsection update.
 
 ---
 
 ## SECTION 24 — SCORING THRESHOLDS
-* **Weights:** Dalio (20%), Dimon (20%), Buffett (20%), Blanchard (20%), Marks (20%) (simple average); 2x weight on regime-aligned frameworks for regime-weighted average.
-* **Red Flag Deductions:**
-    * Minor: -2
-    * Moderate: -5
-    * Critical: -10
+
+* **Framework Weights:**
+    * Simple average: Dalio 20%, Dimon 20%, Buffett 20%, Blanchard 20%, Marks 20%
+    * Regime-weighted average: 2x weight on regime-aligned frameworks per Section 5
+
+* **Scoring Math (per-framework, 0–100 scale):**
+    * Target allocation match: **50 points maximum** (proportional to match quality)
+    * Green-flag characteristics: **25 points maximum** (sum of green flags present)
+    * Absence of red flags: **25 points maximum** (start at 25, deduct red flag penalties below)
+    * **Floor: 0 points**
+    * **Ceiling: 100 points**
+    * Apply caps after computing raw score; lowest applicable cap wins.
+
+* **Severity-Graded Red Flag Deductions:**
+    * Minor: **-2 points**
+    * Moderate: **-5 points**
+    * Critical: **-10 points + score cap at 50%**
+
 * **Score Caps:**
-    * **Critical Red Flag:** Max 50% for that framework.
-    * **Horizon Mismatch:** 75% / 65% / 55% (Graduated, per Section 6).
-    * **Single Holding > 25%:** Max 70% (with escalation per Section 16: 50–70% → 55%; >70% → 40%).
-* **Rule:** Lowest applicable cap wins.
+    * **Critical Red Flag:** max 50% for that framework
+    * **Horizon mismatch:** graduated 75% / 65% / 55% per Section 6
+    * **Single Holding >25%:** graduated max 70% / 55% / 40% per Section 16
+    * **Margin / negative cash:** 50% cap across all frameworks
+    * **All-cash:** 50% Buffett cap, 60% Dalio cap (Marks no cap; Dimon and Blanchard scored normally)
+
+* **Cap Interaction Rule:** When multiple caps apply to the same framework, **lowest cap wins**. The analyzer must name all applicable caps in its Section 2 narrative and state which cap won.
+
 * **Score Bands:**
     * Strong Alignment: 80–100%
     * Moderate: 60–79%
     * Partial: 40–59%
     * Weak: 20–39%
     * Anti-Aligned: 0–19%
+
+---
+
+## SECTION 25 — BENCHMARK PORTFOLIOS
+
+*Reference portfolios used by PORTFOLIO-ANALYZER-PROMPT.md STEP 5.3 for context. These are static; do not modify per refresh.*
+
+**Benchmark 1 — Simple 60/40**
+- 60% US Equity (broad market index)
+- 40% US Aggregate Bond Index (intermediate duration, IG quality)
+- Currency: 100% USD
+- Liquidity: 100% Tier 1–2
+- Single-holding concentration: none
+- Use case: baseline against which any allocation is compared
+
+**Benchmark 2 — Bridgewater All Weather (translation)**
+- 30% US Equities
+- 40% Long-term Treasuries (Long duration, Treasury quality)
+- 15% Intermediate Treasuries (Intermediate duration, Treasury quality)
+- 7.5% Gold
+- 7.5% Commodities (broad index)
+- Currency: ~85% USD, ~15% non-USD via commodities
+- Liquidity: 100% Tier 1–2
+- Use case: regime-balanced reference; matches Dalio target allocation
+
+**Analyzer use:** Score both benchmarks against all five frameworks. Reference results in Section 2 narrative where they add context (e.g., "your portfolio scores higher than 60/40 against Dalio but lower against Buffett").
 
 ---
 
