@@ -142,6 +142,7 @@ Then continue to the disclaimer and Question 1.
 ---
 
 > **Important:** This analysis is not investment advice. It is an AI-generated comparison of your portfolio against its interpretation of the publicly available writings, interviews, and stated philosophies of five investment thinkers — Ray Dalio, Jamie Dimon, Warren Buffett, Olivier Blanchard, and Howard Marks. The scores and recommendations reflect how closely your holdings align with what these experts appear to advocate, based on the AI's understanding of their work. They do not reflect the experts' actual opinions about your portfolio, and they should not be taken as a recommendation to buy, sell, or hold any security. This analysis depends on CRITERIA.md being current and accurate; the version date and staleness are reported above. Always consult a qualified financial advisor before making investment decisions.
+> Privacy is based on the policies of the AI you are using. For best security, export your portfolio into an editable PDF, CSV file, or spreadsheet and delete personally identifying data like name and account number.
 
 ---
 
