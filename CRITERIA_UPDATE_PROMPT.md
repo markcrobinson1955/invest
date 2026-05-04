@@ -744,6 +744,12 @@ If any box unchecked, fix and recheck before emitting.
 9. Every cell change in Section 22 has a sourced note below the table.
 10. Run the Analyzer Compatibility Checklist before emitting.
 
----
+--
+
+NEWS
+thia section added by tye user to highlught relevant news stories.
+
+may 4
+Three signals will tell you whether Dalio’s clock is running fast or slow: Treasury auction demand, particularly the bid-to-cover ratios on long-duration paper; the 10Y-2Y spread holding above zero (currently 1%); and whether consumer sentiment can break its 8-month downtrend from the July 2025 peak of 61.7. The full conversation is available on the Prof G Markets feed. Treat it as one prominent macro investor’s view and weigh it accordingly against the broader consensus.
 
 *End of CRITERIA.md Update Prompt. Version 2026-04-25b.*
