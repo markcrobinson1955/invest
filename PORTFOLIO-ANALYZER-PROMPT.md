@@ -30,9 +30,9 @@ If the user explicitly asks to edit or revise this analyzer file after the sessi
 
 # Portfolio Analysis Prompt
 
-**Version:** 2026-04-25a
-**Last updated:** 2026-04-25
-**Next scheduled review:** 2026-05-25
+**Version:** 2026-05-07a
+**Last updated:** 2026-05-07
+**Next scheduled review:** 2026-06-07
 **Companion files:** CRITERIA.md (the data file this analyzer reads), CRITERIA_UPDATE_PROMPT.md (the file that refreshes CRITERIA.md)
 
 ---
@@ -44,6 +44,7 @@ If the user explicitly asks to edit or revise this analyzer file after the sessi
 | **2026-04-22a** | 2026-04-22 | Initial rewrite from prior unversioned prompt. Applied four UX changes: (1) options formatted one per line throughout; (2) security note updated to clarify LLM controls data access; (3) sample portfolio offer mentioned in HOW TO USE intro; (4) post-report Q&A opportunity noted in document offer. |
 | **2026-04-22b** | 2026-04-22 | Added CRITERIA.md refresh offer after On Load confirmation. Appears on both Branch A and Branch B. Fetches CRITERIA_UPDATE_PROMPT.md from GitHub if user selects refresh. Graceful fallback if fetch fails. Disclaimer moved to after refresh offer resolves. |
 | **2026-04-25a** | 2026-04-25 | Full rewrite from audit. Resolved compatibility mismatches with CRITERIA.md 2026-04-25a. Aligned drawdown scenarios (5 in both files). Aligned edge cases. Added AI mega-cap concentration check. Aligned time horizon caps (3-tier 75/65/55). Aligned scoring math (now defined in CRITERIA.md Section 24). Added [verify] tag handling. Added significant-event handling. Added refresh offer staleness gate (only shown if CRITERIA.md ≥7 days old). Added refresh-completion summary requirement. Added goal-weighting operationalization (Q4). Added length budgets per output section. Standardized Q1 and Q3 to lettered options. Collapsed post-analysis offer into single block. Added cap-interaction display rule. Added 0/100 score floor/ceiling. Added analyzer compatibility checklist (analyzer-side). Added audit-mode exception in activation block. Added structural-defect handling for malformed CRITERIA.md. |
+| **2026-05-07a** | 2026-05-07 | Bug fix: switched both GitHub fetch URLs (Branch B CRITERIA.md and refresh-offer CRITERIA_UPDATE_PROMPT.md) from raw.githubusercontent.com to api.github.com/repos/.../contents/. The raw endpoint was returning stale content via CDN, causing the refresh function to fetch a wrong/older file. The API endpoint bypasses the CDN and returns authoritative content. Added decode instruction noting the API returns JSON with base64-encoded content. Removed stray bracket characters around the refresh-offer URL that would have broken the fetch. Corrected structural-defect check wording from "eight edge-case categories" to "nine" (the list always had nine items; only the count word was wrong). |
 
 ---
 
@@ -79,7 +80,9 @@ Announce the fetch attempt: *"Fetching CRITERIA.md from GitHub..."*
 
 Attempt to fetch CRITERIA.md from GitHub at this URL:
 
-`https://raw.githubusercontent.com/markcrobinson1955/invest/main/CRITERIA.md`
+`https://api.github.com/repos/markcrobinson1955/invest/contents/CRITERIA.md`
+
+The response is JSON. The file's markdown is in the `content` field, base64-encoded. Decode it before reading. (Reason: the raw.githubusercontent.com URL was returning stale content via CDN; the API endpoint is authoritative.)
 
 If the fetch succeeds, confirm load with:
 
@@ -96,7 +99,7 @@ After CRITERIA.md is loaded, verify the file is structurally intact before conti
 - File contains all sections numbered 1–25
 - Section 5 contains the five-regime taxonomy (Traditional, Inflationary, Stagflation, Fiscal-dominance, Deflationary)
 - Section 9 contains five drawdown scenarios
-- Section 16 covers all eight edge-case categories (leveraged ETFs, options, margin, extreme concentration, all-cash, crypto, direct real estate, private business, pension/annuity)
+- Section 16 covers all nine edge-case categories (leveraged ETFs, options, margin, extreme concentration, all-cash, crypto, direct real estate, private business, pension/annuity)
 - Section 22 has exactly 14 consensus signal rows
 - Section 25 contains the two benchmark portfolios (60/40 and Bridgewater All Weather)
 - Inline `[verify]` tags match the Section 13 list exactly
@@ -127,7 +130,7 @@ When showing the refresh offer, display this exactly:
 
 **Web-search availability check:** If web search is not available in the current environment, suppress the offer entirely and state: *"CRITERIA.md is [X] days old. Refresh requires web search, which is not available in this session — proceeding with the current version."*
 
-**If the user selects a):** Fetch CRITERIA_UPDATE_PROMPT.md from GitHub at this URL: `[https://raw.githubusercontent.com/markcrobinson1955/invest/main/CRITERIA_UPDATE_PROMPT.md]`. Run it against the current CRITERIA.md using web search. The updater will produce its own progress narration; let it run. When complete, summarize the refresh in 2–3 lines:
+**If the user selects a):** Fetch CRITERIA_UPDATE_PROMPT.md from GitHub at this URL: `https://api.github.com/repos/markcrobinson1955/invest/contents/CRITERIA_UPDATE_PROMPT.md`. The response is JSON; the file's markdown is in the `content` field, base64-encoded. Decode it before reading. (Reason: the raw.githubusercontent.com URL was returning stale content via CDN; the API endpoint is authoritative.) Run the decoded prompt against the current CRITERIA.md using web search. The updater will produce its own progress narration; let it run. When complete, summarize the refresh in 2–3 lines:
 
 > *"CRITERIA.md refreshed (version [new version]). Macro: [N] figures updated, [N] new [verify] tags. Frameworks: [framework names with material updates]. Watch List: [N] resolved, [N] added. Proceeding with updated criteria."*
 
@@ -613,4 +616,4 @@ If any box fails: report which section is missing or malformed; suggest refresh;
 
 ---
 
-**End of Portfolio Analysis Prompt. Version 2026-04-25a.**
+**End of Portfolio Analysis Prompt. Version 2026-05-07a.**
