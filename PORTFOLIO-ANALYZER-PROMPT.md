@@ -127,7 +127,7 @@ When showing the refresh offer, display this exactly:
 
 **Web-search availability check:** If web search is not available in the current environment, suppress the offer entirely and state: *"CRITERIA.md is [X] days old. Refresh requires web search, which is not available in this session — proceeding with the current version."*
 
-**If the user selects a):** Fetch CRITERIA_UPDATE_PROMPT.md from GitHub at this URL: `https://raw.githubusercontent.com/markcrobinson1955/invest/main/CRITERIA_UPDATE_PROMPT.md`. Run it against the current CRITERIA.md using web search. The updater will produce its own progress narration; let it run. When complete, summarize the refresh in 2–3 lines:
+**If the user selects a):** Fetch CRITERIA_UPDATE_PROMPT.md from GitHub at this URL: `[https://raw.githubusercontent.com/markcrobinson1955/invest/main/CRITERIA_UPDATE_PROMPT.md]`. Run it against the current CRITERIA.md using web search. The updater will produce its own progress narration; let it run. When complete, summarize the refresh in 2–3 lines:
 
 > *"CRITERIA.md refreshed (version [new version]). Macro: [N] figures updated, [N] new [verify] tags. Frameworks: [framework names with material updates]. Watch List: [N] resolved, [N] added. Proceeding with updated criteria."*
 
