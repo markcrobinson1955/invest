@@ -1,8 +1,8 @@
 # CRITERIA.md Update Prompt
 
-**Version:** 2026-04-25b
-**Last updated:** 2026-04-25
-**Next scheduled review:** 2026-05-25
+**Version:** 2026-05-07a
+**Last updated:** 2026-05-07
+**Next scheduled review:** 2026-06-07
 **Companion files:** CRITERIA.md (the file this prompt regenerates), PORTFOLIO-ANALYZER-PROMPT.md (the consumer of CRITERIA.md)
 
 ---
@@ -14,6 +14,7 @@
 | **2026-04-22b** | 2026-04-22 | Prior version. Section-numbered structure (22 sections). Contained instructions for AI Deep Analysis Prompt section that no longer exists. |
 | **2026-04-25a** | 2026-04-25 | Full rewrite from audit. Realigned section structure to match CRITERIA.md 2026-04-22a (24 sections). Removed AI Deep Analysis Prompt instruction. Added missing sections: Macro Verification Requirements, Fixed Income Classification Dimensions, Sector and Factor Exposure Check, Edge-Case Handling, Earnings Yield vs Credit Yield Snapshot. Restored 14-row Consensus Signals table per analyzer STEP 5.1. Restored Green Flags subsections per analyzer STEP 2.4. Restored extreme concentration escalation tiers per analyzer STEP 1F. Restored five-regime taxonomy per analyzer STEP 1A. Added real-time progress reporting with significant-event flagging. Added [verify] tag maintenance. Added per-data-type staleness thresholds. Added confidence labeling rubric. Added role-lock statement. Added analyzer compatibility checklist. |
 | **2026-04-25b** | 2026-04-25 | Expanded scope to support PORTFOLIO-ANALYZER-PROMPT.md 2026-04-25a. Section count increased 24 → 25. Section 9 (Drawdown Scenarios) expanded from 3 to 5 scenarios. Section 15 added AI Mega-Cap Concentration Flag. Section 16 expanded from 4 to 9 edge-case categories. Sections 17–21 each gained an "Optimal hold period" line. Section 24 gained explicit 50/25/25 scoring math, 0/100 floor/ceiling, cap interaction rule. Added new Section 25 (Benchmark Portfolios) per analyzer STEP 5.3. |
+| **2026-05-07a** | 2026-05-07 | Formalized the operator NEWS section. Previously a free-form appendix appearing after the file footer with no ingestion rules; now a structured section before the footer with explicit refresh-agent handling instructions. Added "Step 0 — Operator News Review" to the workflow, requiring the refresh agent to read the NEWS section before searching the web and treat each item as a candidate input for Section 4 (macro), Section 23 (Watch List), or Sections 17–21 (framework theses) per the routing rules below. Added news-item citation rule (operator-supplied items must still be confirmed to a primary source). Added Analyzer Compatibility Checklist item 22 (operator news items processed). |
 
 ---
 
@@ -41,6 +42,37 @@ Search the web for current information and produce a complete replacement CRITER
 The static sections carry forward verbatim from the prior version. Only the dynamic sections require fresh research.
 
 Output the entire file as a single continuous markdown document. Do not include any preamble, explanation, or commentary inside the file output. Start the file with: `# Portfolio Alignment Criteria File`. End with: `*End of Portfolio Alignment Criteria File. Generated [TODAY'S DATE].*`.
+
+---
+
+## STEP 0 — OPERATOR NEWS REVIEW (DO THIS FIRST)
+
+Before any web search, read the OPERATOR NEWS NOTES section at the end of this prompt. The operator may have pasted articles, excerpts, or links there as candidate inputs for this refresh. Treat each item as follows:
+
+**Routing rules:**
+
+1. **Macro data point** (a price, rate, ratio, official figure, policy decision, scheduled event date) → consider for the matching subsection in CRITERIA.md Section 4. The operator's note is a *lead*, not a source. You must still confirm the figure to a primary source within its staleness threshold. If primary-source confirmation succeeds, cite the primary source in the file (not the operator note). If confirmation fails within threshold, append `[verify]`.
+
+2. **Tracked event or trigger** (an upcoming meeting, an awaited ruling, a developing situation) → consider for Section 23 Watch List. Build a three-part Watch List entry per Section 23 rules: description — category — measurable trigger. If the operator's note is too vague to produce a measurable trigger, narrate that gap and convert what you can.
+
+3. **Framework-thesis input** (a quote, memo reference, or commentary attributed to Dalio, Dimon, Buffett, Abel, Blanchard, or Marks) → consider for the relevant framework section (17–21). Confirm to a primary source per the staleness rules for that framework. Update Current Thesis or Recent Commentary if material; if not material, narrate that you reviewed and declined.
+
+4. **Significant event candidate** → apply the SIGNIFICANT EVENT FLAGGED protocol below.
+
+5. **Off-topic, opinion-only, or unsourceable** → narrate that you read the item and declined to ingest, with one-line reason.
+
+**Operator news handling rules:**
+
+- Operator-supplied items are inputs to your search agenda, not outputs to be embedded verbatim. The file you produce must read as your work, sourced to primary sources.
+- Never quote operator-supplied opinion as if it were market consensus.
+- Every operator item must be addressed in narration: ingested (with where it landed), confirmed but not material (with note), or declined (with reason).
+- If the OPERATOR NEWS NOTES section is empty or contains only the placeholder, narrate "No operator news notes this refresh" and proceed.
+
+**Narration format for operator items:**
+
+> *Operator note 1 of 3 — [brief summary of the item]. Routing: [Section 4 subsection / Section 23 / Section 17–21 framework / declined]. Action: [confirmed via primary source X, updated; or could not confirm, applied [verify]; or not material, no change; or declined, reason].*
+
+Complete Step 0 before beginning the BEFORE YOU BEGIN — REVIEW THE PRIOR WATCH LIST step.
 
 ---
 
@@ -165,15 +197,13 @@ Section numbers below correspond exactly to section numbers in the output file. 
 
 Output exactly:
 
-```
-# Portfolio Alignment Criteria File
+    # Portfolio Alignment Criteria File
 
-*Version: [TODAY'S DATE WITH SUFFIX LETTER]*
+    *Version: [TODAY'S DATE WITH SUFFIX LETTER]*
 
-*Last full refresh: [TODAY'S DATE]*
+    *Last full refresh: [TODAY'S DATE]*
 
-*Next scheduled refresh: [DATE ONE MONTH FROM TODAY]*
-```
+    *Next scheduled refresh: [DATE ONE MONTH FROM TODAY]*
 
 **Version suffix rule:** Use a letter suffix for same-day revisions (`2026-04-25a`, `2026-04-25b`, etc.). First refresh of a day gets `a`.
 
@@ -185,11 +215,9 @@ Output the heading `## SECTION 2 — CHANGE LOG` followed by a markdown table wi
 
 Carry forward every prior row exactly. Add one new row for this refresh:
 
-```
-| [TODAY'S DATE] | [TODAY'S DATE WITH SUFFIX] | [Specific description of what changed in this refresh] |
-```
+    | [TODAY'S DATE] | [TODAY'S DATE WITH SUFFIX] | [Specific description of what changed in this refresh] |
 
-Description must be specific. Bad: "Refresh." Good: "Updated US debt to $39.52T. Updated gold to $2,341. Updated Dimon thesis based on JPM Q1 2026 earnings call. Resolved Watch List items 3, 7. Added new Watch List items for Taiwan Strait."
+Description must be specific. Bad: "Refresh." Good: "Updated US debt to $39.52T. Updated gold to $2,341. Updated Dimon thesis based on JPM Q1 2026 earnings call. Resolved Watch List items 3, 7. Added new Watch List items for Taiwan Strait. Ingested 2 of 3 operator news notes."
 
 ---
 
@@ -620,7 +648,7 @@ Maintain 15–20 items covering: Fed meetings and data; Fed personnel; Berkshire
 - Resolved this refresh: removed; note resolution in narration
 - Pending: carry forward with updated status
 - Escalated: re-categorize from Criteria refresh to Immediate watch if appropriate
-- New: add for any SIGNIFICANT EVENT flagged this refresh; add for newly emerging risks
+- New: add for any SIGNIFICANT EVENT flagged this refresh; add for newly emerging risks; add for operator news items routed to Section 23 in Step 0
 
 ---
 
@@ -695,9 +723,9 @@ Below: `*Reference portfolios used by PORTFOLIO-ANALYZER-PROMPT.md STEP 5.3 for 
 
 ### FILE FOOTER (static)
 
-```
-*End of Portfolio Alignment Criteria File. Generated [TODAY'S DATE].*
-```
+Output exactly:
+
+    *End of Portfolio Alignment Criteria File. Generated [TODAY'S DATE].*
 
 ---
 
@@ -726,6 +754,7 @@ Before outputting the replacement CRITERIA.md, walk this checklist. Fix any fail
 19. ☐ Every dynamic subsection has Last updated and Confidence labels
 20. ☐ Change Log Section 2 has new row specific to this refresh
 21. ☐ Version date in Section 1 matches Change Log new row date
+22. ☐ Operator news items processed per Step 0 — each ingested, confirmed-not-material, or declined with reason in narration
 
 If any box unchecked, fix and recheck before emitting.
 
@@ -733,7 +762,7 @@ If any box unchecked, fix and recheck before emitting.
 
 ## OUTPUT REQUIREMENTS
 
-1. Real-time progress narration first. Complete all of it before file output.
+1. Real-time progress narration first, beginning with Step 0 operator news review. Complete all of it before file output.
 2. Then output entire CRITERIA.md as one continuous markdown document.
 3. No preamble, summary, or commentary inside the file.
 4. Start the file with `# Portfolio Alignment Criteria File`.
@@ -744,12 +773,51 @@ If any box unchecked, fix and recheck before emitting.
 9. Every cell change in Section 22 has a sourced note below the table.
 10. Run the Analyzer Compatibility Checklist before emitting.
 
---
+---
 
-NEWS
-thia section added by tye user to highlught relevant news stories.
+## OPERATOR NEWS NOTES — REFRESH AGENT INPUT
 
-may 4
-Three signals will tell you whether Dalio’s clock is running fast or slow: Treasury auction demand, particularly the bid-to-cover ratios on long-duration paper; the 10Y-2Y spread holding above zero (currently 1%); and whether consumer sentiment can break its 8-month downtrend from the July 2025 peak of 61.7. The full conversation is available on the Prof G Markets feed. Treat it as one prominent macro investor’s view and weigh it accordingly against the broader consensus.
+This section is for the operator (the human running the refresh) to paste news articles, excerpts, links, or commentary that should be considered as candidate inputs for the next refresh. The refresh agent processes this section in **Step 0** before any web search.
 
-*End of CRITERIA.md Update Prompt. Version 2026-04-25b.*
+**Operator instructions — how to use this section:**
+
+- Paste content here at any time between refreshes. The next refresh will pick it up.
+- Each item should be a separate block. Use `---` between items.
+- Free-form is acceptable. Helpful (not required) per item: a date, a source, the URL, a one-line note on why you think it matters.
+- This is *input to the refresh agent*, not output to the file. Items here will not appear verbatim in CRITERIA.md.
+- After a refresh, items may be cleared, kept, or annotated. The refresh agent will narrate what it did with each item.
+
+**Refresh agent rules — how to handle items here:**
+
+- Read every item before searching the web (Step 0 of the workflow).
+- Route each item per the Step 0 rules: Section 4 macro / Section 23 Watch List / Sections 17–21 framework theses / Significant Event / declined.
+- Operator-supplied items are *leads*, not sources. Confirm to a primary source within the staleness threshold for that data type. Cite the primary source in the file, not the operator note.
+- Never quote operator-supplied opinion as if it were market consensus.
+- Address every item in narration: ingested (with destination), confirmed-not-material (with note), or declined (with reason).
+- If this section is empty or contains only the placeholder below, narrate "No operator news notes this refresh" and proceed.
+
+**Format suggestion (not enforced):**
+
+    ---
+    Date: [date you saw it]
+    Source: [publication, podcast, report, or "operator commentary"]
+    URL: [if available]
+    Why it matters: [one line]
+
+    [Pasted content or summary]
+    ---
+
+**Items below this line — operator paste zone:**
+
+<!-- PASTE NEW ITEMS BELOW. Items above this comment that are no longer relevant may be removed. -->
+
+---
+Date: May 4
+Source: Prof G Markets podcast (Dalio interview)
+URL: [add if available]
+Why it matters: Dalio macro framework signals to track — useful for Section 23 Watch List triggers and Section 17 thesis refresh
+
+Three signals will tell you whether Dalio's clock is running fast or slow: Treasury auction demand, particularly the bid-to-cover ratios on long-duration paper; the 10Y-2Y spread holding above zero (currently 1%); and whether consumer sentiment can break its 8-month downtrend from the July 2025 peak of 61.7. The full conversation is available on the Prof G Markets feed. Treat it as one prominent macro investor's view and weigh it accordingly against the broader consensus.
+---
+
+*End of CRITERIA.md Update Prompt. Version 2026-05-07a.*
