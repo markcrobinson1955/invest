@@ -139,9 +139,10 @@ Do not invent CRITERIA.md content. If CRITERIA.md is not loaded, stop. Do not su
 
 ### Question 1 — Investment Concepts
 
+First, these questions will help me determine the complexity of the language used to display information. 
 Which of these are you comfortable with? Pick the highest level that's true:
 
-a) Stocks and bonds, basic mutual funds and ETFs
+a) Stocks and bonds, basic mutual funds and ETFs 
 
 b) The above, plus duration, expense ratios, asset allocation, rebalancing
 
