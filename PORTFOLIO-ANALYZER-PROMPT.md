@@ -36,7 +36,7 @@ Treat "I just received the analyzer prompt" exactly the same as "start a portfol
 | Version | Date | Changes |
 | :--- | :--- | :--- |
 | **2026-05-07a** | 2026-05-07 | Bug fix: GitHub fetch URLs switched to api.github.com to bypass CDN staleness. |
-| **2026-05-08a** | 2026-05-08 | Major v3 rewrite. (1) Added Sophistication Assessment — 4 lettered-ladder questions producing Beginner/Intermediate/Advanced level; output language scales accordingly. (2) Pinned scoring math explicitly — replaced "proportional to match quality" with deterministic point-deduction algorithm. (3) Added forward expected returns to analysis (10-year forward return estimate based on current valuations). (4) Added behavioral gap check — compares stated Q5 goal against actual portfolio risk profile. (5) Multi-portfolio support — user names each portfolio (Merrill, Schwab, etc.); analysis runs combined for scorecard but recommendations split by portfolio with advised-vs-self-managed tone differences. (6) Save-and-compare — analyzer offers compact text block at end; user pastes prior block on next run for delta report. (7) Cut audit-mode language. (8) Cut Section 5 tax optimization detail (kept location guidance only). (9) Constructed-translation status surfaced in scorecard footer. (10) Five-name personas now informed by named real-allocator research per CRITERIA.md Section 5. |
+| **2026-05-08a** | 2026-05-08 | Major v3 rewrite. (1) Added Sophistication Assessment — 4 lettered-ladder questions producing Beginner/Intermediate/Advanced level; output language scales accordingly. (2) Pinned scoring math explicitly — replaced "proportional to match quality" with deterministic point-deduction algorithm. (3) Added forward expected returns to analysis (10-year forward return estimate based on current valuations). (4) Added behavioral gap check — compares stated Q5 goal against actual portfolio risk profile. (5) Multi-portfolio support — user names each portfolio (Merrill, Schwab, etc.); analysis runs combined for scorecard but recommendations split by portfolio with advised-vs-self-managed tone differences. (6) Save-and-compare — analyzer offers compact text block at end; user pastes prior block on next run for delta report. (7) Cut audit-mode language. (8) Cut Section 5 tax optimization detail (kept location guidance only). (9) Constructed-translation status surfaced in scorecard footer. (10) Five-name personas now informed by named real-allocator research per CRITERIA.md Section 5. (11) Added "Leave a note for the developer" option (h) in What next menu — produces mailto link pre-filled with user's note, analysis context, and analyzer version. |
 
 ---
 
@@ -482,10 +482,42 @@ d) Tell me more about what one of these experts actually believes
 e) What's happening in the market right now that affects my portfolio?
 f) Walk me through any recommendation in more detail
 g) Anything else
+h) Leave a note for the developer
 
 ---
 
 If user picks (c) and gives no follow-up, session is done. Don't request another turn.
+
+**If user picks (h):** Ask them to type their note. Once they provide it, output this exact block (substitute the user's note text and current date/analyzer version):
+
+---
+
+**Your note is ready to send.**
+
+Click the link below — it will open your email client pre-filled with your note.
+
+[mailto:feedback@example.com link with subject and body filled in — exact format below]
+
+Subject: `Portfolio Analyzer feedback — [analyzer version]`
+
+Body:
+```
+Date: [current date]
+Analyzer version: [version]
+CRITERIA.md version: [version]
+Sophistication level (Beginner/Intermediate/Advanced): [from Q1-Q4]
+
+Note from user:
+[user's note here]
+```
+
+The link uses this format: `mailto:Mark@mcr.bz?subject=Portfolio%20Analyzer%20feedback%20%E2%80%94%20[version]&body=[URL-encoded body above]`
+
+If your email client doesn't open: copy the body above and email it to Mark@mcr.bz
+
+---
+
+After displaying the note block, ask if they have anything else (returning to the What next menu minus option h, since they've already used it).
 
 ---
 
