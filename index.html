@@ -304,7 +304,7 @@
 <header>
   <div class="eyebrow">Private Investment Tool</div>
   <h1>Portfolio Alignment <em>Analyzer</em></h1>
-  <p class="subtitle">Compare your portfolio against five investing frameworks — Dalio, Dimon, Buffett, Blanchard, and Marks — using any major AI assistant.</p>
+  <p class="subtitle">Compare your portfolio against five investing frameworks — Dalio, Dimon, Buffett, Blanchard, and Marks — using any major AI assistant. Now with multi-portfolio support and analysis that scales to your experience level.</p>
 </header>
 
 <section>
@@ -335,7 +335,7 @@
 
 <section>
   <h2><span class="step-number">02.</span>Paste into any AI assistant</h2>
-  <p>Open a new conversation with your preferred assistant, paste, and send. The analyzer will ask four brief questions — base currency, time horizon, taxpayer status, and primary goal — then ask you to upload your portfolio. If you'd prefer to see how the analyzer works first, type <strong>SAMPLE</strong> when prompted and it will run a full analysis on a generated $1,000,000 60/40 portfolio.</p>
+  <p>Open a new conversation with your preferred assistant, paste, and send. The analyzer will ask a short series of questions to calibrate the analysis to your experience level — then ask you to upload one or more portfolios. If you'd prefer to see how it works first, type <strong>SAMPLE</strong> when prompted and it will run a full analysis on a generated $1,000,000 60/40 portfolio.</p>
   <div class="llm-links">
     <a href="https://claude.ai/new" target="_blank" rel="noopener">Claude →</a>
     <a href="https://chat.openai.com/" target="_blank" rel="noopener">ChatGPT →</a>
@@ -344,8 +344,8 @@
 </section>
 
 <section>
-  <h2><span class="step-number">03.</span>Upload your portfolio</h2>
-  <p>When the analyzer asks, upload your portfolio in whatever format you have — CSV, Excel, PDF, a screenshot, or plain text. If you use tax-advantaged accounts and want tax-location advice, include account names (IRA, Roth, Taxable).</p>
+  <h2><span class="step-number">03.</span>Upload one or more portfolios</h2>
+  <p>The analyzer accepts multiple portfolios across different custodians. Name each one (for example, "Merrill — advised" or "Schwab — self-managed") and the recommendations will be split appropriately: advised accounts get conversation starters for your advisor; self-managed accounts get direct action steps. Upload in any format you have — CSV, Excel, PDF, screenshot, or plain text.</p>
   <p style="font-size: 0.875rem; color: var(--ink-faint); font-style: italic;">Your portfolio goes only to the AI assistant you chose. This page never sees or stores it.</p>
 </section>
 
@@ -353,27 +353,30 @@
 
 <section>
   <h2>What you'll receive</h2>
-  <p>A full alignment report that includes:</p>
+  <p>A full alignment report calibrated to your experience level:</p>
   <ul>
-    <li>Preliminary assessments — correlation regime, liquidity tiers, currency exposure, concentration checks</li>
-    <li>Scoring against each of the five frameworks, with red and green flags identified</li>
-    <li>A prioritized action list ranked by cross-framework impact</li>
-    <li>Drawdown stress tests against historical scenarios</li>
-    <li>Tax location recommendations, if you are a US taxpayer and included account names</li>
+    <li>A one-page summary scorecard with the highest-impact action item</li>
+    <li>An estimate of forward 10-year returns based on current valuations</li>
+    <li>A behavioral check that flags gaps between your stated goals and actual portfolio risk</li>
+    <li>Detailed scoring against each of the five frameworks, with red and green flags identified</li>
+    <li>A prioritized action list, split per portfolio with appropriate framing for advised vs self-managed accounts</li>
+    <li>Drawdown stress tests against five historical scenarios</li>
+    <li>Tax location recommendations, if you're a US taxpayer and included account names</li>
+    <li>A "save block" you can copy and paste into your next analysis to track changes over time</li>
   </ul>
-  <p>After the analysis, you can request a downloadable report and then ask follow-up questions — about specific recommendations, what the experts actually believe, or what's happening in the market right now.</p>
-  <p style="font-size: 0.875rem; color: var(--ink-faint); font-style: italic;">This is educational analysis, not personalized financial advice. The analyzer never recommends specific securities — only allocation categories and portfolio construction principles.</p>
+  <p>After the analysis, you can ask follow-up questions about specific recommendations, what the experts actually believe, or what's happening in the market right now.</p>
+  <p style="font-size: 0.875rem; color: var(--ink-faint); font-style: italic;">This is educational analysis, not personalized financial advice. The analyzer never recommends specific securities — only allocation categories and portfolio construction principles. The five expert names refer to AI-interpreted philosophies informed by published research from real institutional allocators (AQR, Swensen, Ilmanen, Arnott).</p>
 </section>
 
 </div>
 
 <footer>
-  Last updated April 2026 · Built for the curious investor
+  Last updated May 2026 · Built for the curious investor
 </footer>
 
 <script>
-const ANALYZER_URL = 'https://raw.githubusercontent.com/markcrobinson1955/invest/main/PORTFOLIO-ANALYZER-PROMPT.md';
-const CRITERIA_URL = 'https://raw.githubusercontent.com/markcrobinson1955/invest/main/CRITERIA.md';
+const ANALYZER_URL = 'https://api.github.com/repos/markcrobinson1955/invest/contents/PORTFOLIO-ANALYZER-PROMPT.md';
+const CRITERIA_URL = 'https://api.github.com/repos/markcrobinson1955/invest/contents/CRITERIA.md';
 
 const loader = document.getElementById('loader');
 const readyPanel = document.getElementById('readyPanel');
@@ -406,21 +409,13 @@ function showError(msg) {
 }
 
 function extractAnalyzerVersion(text) {
-  const match = text.match(/Analyzer last updated:\s*([^\n]+)/i);
+  const match = text.match(/\*\*Version:\*\*\s*([^\n]+)/i);
   return match ? match[1].trim() : null;
 }
 
 function extractCriteriaVersion(text) {
-  const patterns = [
-    /Version\s*[:\/]?\s*Last full refresh[:\s]+([^\n]+)/i,
-    /Version[:\s]+([^\n]+)/i,
-    /Last (?:full )?(?:refresh|updated)[:\s]+([^\n]+)/i
-  ];
-  for (const pattern of patterns) {
-    const match = text.match(pattern);
-    if (match) return match[1].trim();
-  }
-  return null;
+  const match = text.match(/\*Version:\s*([^\*\n]+)\*/i);
+  return match ? match[1].trim() : null;
 }
 
 function showStatus(message, isError = false) {
@@ -430,12 +425,33 @@ function showStatus(message, isError = false) {
   setTimeout(() => statusEl.classList.remove('visible'), 3500);
 }
 
+// Decode base64 content from GitHub API response
+function decodeBase64(b64) {
+  // GitHub returns base64 with newlines; strip them
+  const clean = b64.replace(/\n/g, '');
+  // Decode and handle UTF-8
+  const binary = atob(clean);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return new TextDecoder('utf-8').decode(bytes);
+}
+
 async function fetchFile(url) {
-  const response = await fetch(`${url}?t=${Date.now()}`, { cache: 'no-store' });
+  // Cache-busting query parameter
+  const response = await fetch(`${url}?t=${Date.now()}`, {
+    cache: 'no-store',
+    headers: { 'Accept': 'application/vnd.github.v3+json' }
+  });
   if (!response.ok) {
     throw new Error(`HTTP ${response.status} fetching ${url.split('/').pop()}`);
   }
-  const text = await response.text();
+  const data = await response.json();
+  if (!data.content) {
+    throw new Error(`No content field in API response for ${url.split('/').pop()}`);
+  }
+  const text = decodeBase64(data.content);
   if (!text || text.length < 500) {
     throw new Error(`${url.split('/').pop()} content looks incomplete`);
   }
