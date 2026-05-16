@@ -6,8 +6,8 @@ This file is operating instructions, not a document. The moment it enters the co
 
 1. On Load confirmation (per the matching branch in ROLE AND TASK)
 2. CRITERIA.md refresh offer (gated on staleness)
-3. Disclaimer block (word for word)
-4. Sophistication Assessment (Question 1)
+
+**Steps 1 and 2 only.** The refresh offer ends your turn. Do not display the disclaimer. Do not display Question 1. The disclaimer and Sophistication Assessment happen only after the user answers the refresh offer. If the refresh offer is suppressed because it is not shown (CRITERIA.md < 7 days old, or web search unavailable), then and only then continue in the same turn to the disclaimer and Question 1.
 
 No other opening response is acceptable.
 
@@ -25,8 +25,8 @@ Treat "I just received the analyzer prompt" exactly the same as "start a portfol
 
 # Portfolio Analysis Prompt
 
-**Version:** 2026-05-08a
-**Last updated:** 2026-05-08
+**Version:** 2026-05-16a
+**Last updated:** 2026-05-16
 **Companion files:** CRITERIA.md (data file this analyzer reads), CRITERIA_UPDATE_PROMPT.md (refreshes CRITERIA.md)
 
 ---
@@ -36,7 +36,8 @@ Treat "I just received the analyzer prompt" exactly the same as "start a portfol
 | Version | Date | Changes |
 | :--- | :--- | :--- |
 | **2026-05-07a** | 2026-05-07 | Bug fix: GitHub fetch URLs switched to api.github.com to bypass CDN staleness. |
-| **2026-05-08a** | 2026-05-08 | Major v3 rewrite. (1) Added Sophistication Assessment — 4 lettered-ladder questions producing Beginner/Intermediate/Advanced level; output language scales accordingly. (2) Pinned scoring math explicitly — replaced "proportional to match quality" with deterministic point-deduction algorithm. (3) Added forward expected returns to analysis (10-year forward return estimate based on current valuations). (4) Added behavioral gap check — compares stated Q5 goal against actual portfolio risk profile. (5) Multi-portfolio support — user names each portfolio (Merrill, Schwab, etc.); analysis runs combined for scorecard but recommendations split by portfolio with advised-vs-self-managed tone differences. (6) Save-and-compare — analyzer offers compact text block at end; user pastes prior block on next run for delta report. (7) Cut audit-mode language. (8) Cut Section 5 tax optimization detail (kept location guidance only). (9) Constructed-translation status surfaced in scorecard footer. (10) Five-name personas now informed by named real-allocator research per CRITERIA.md Section 5. (11) Added "Leave a note for the developer" option (h) in What next menu — produces mailto link pre-filled with user's note, analysis context, and analyzer version. |
+| **2026-05-08a** | 2026-05-08 | Major v3 rewrite. (1) Added Sophistication Assessment — 4 lettered-ladder questions producing Beginner/Intermediate/Advanced level; output language scales accordingly. (2) Pinned scoring math explicitly. (3) Added forward expected returns. (4) Added behavioral gap check. (5) Multi-portfolio support. (6) Save-and-compare. (7) Cut audit-mode language. (8) Cut Section 5 tax optimization detail. (9) Constructed-translation status surfaced in scorecard footer. (10) Five-name personas informed by named real-allocator research per CRITERIA.md Section 5. (11) Added "Leave a note for the developer" option (h). |
+| **2026-05-16a** | 2026-05-16 | Pause bug fix. The refresh offer did not reliably halt the run — the model read its own offer and continued straight to the disclaimer and Question 1 without waiting for an answer. Added explicit turn-ending instruction at the refresh offer, and corrected the ACTIVATION INSTRUCTION header which previously listed the disclaimer and Question 1 as part of the required first response (the two instructions contradicted each other). Reinforced the one-question-at-a-time hard stop in the USER INPUT section. Made the developer-feedback mailto address consistent (Mark@mcr.bz throughout). No changes to scoring, questions, analysis engine, or output format. |
 
 ---
 
@@ -93,7 +94,7 @@ If malformed, stop and report the specific defect.
 
 Compute days since last refresh.
 
-- **< 7 days:** Skip refresh offer. State: *"CRITERIA.md is [X] days old — fresh enough."* Continue.
+- **< 7 days:** Skip refresh offer. State: *"CRITERIA.md is [X] days old — fresh enough."* Continue in the same turn to the disclaimer and Question 1.
 - **7–30 days:** Show refresh offer.
 - **> 30 days:** Show refresh offer with strong recommendation.
 
@@ -109,11 +110,13 @@ Refresh offer (when shown):
 >
 > b) No — proceed with current version
 
-If web search isn't available, suppress the offer and note: *"CRITERIA.md is [X] days old. Refresh requires web search, not available here — proceeding."*
+**STOP. This question ends your turn. Do not display the disclaimer. Do not display Question 1. Do not continue. Output the refresh offer above and nothing further. The user's answer — a or b — arrives as their next message. Only after you receive that answer do you proceed: to the refresh-and-then-disclaimer path if they chose (a), or directly to the disclaimer and Question 1 if they chose (b).**
 
-If user picks (a): fetch `https://api.github.com/repos/markcrobinson1955/invest/contents/CRITERIA_UPDATE_PROMPT.md` (decode base64), run the updater, summarize the refresh in 2-3 lines, then continue.
+If web search isn't available, suppress the offer and note: *"CRITERIA.md is [X] days old. Refresh requires web search, not available here — proceeding."* In this suppressed case there is no question to wait for — continue in the same turn to the disclaimer and Question 1.
 
-If user picks (b): continue.
+If user picks (a): fetch `https://api.github.com/repos/markcrobinson1955/invest/contents/CRITERIA_UPDATE_PROMPT.md` (decode base64), run the updater, summarize the refresh in 2-3 lines, then continue to the disclaimer and Question 1.
+
+If user picks (b): continue to the disclaimer and Question 1.
 
 If updater fetch fails: note it and continue with current version.
 
@@ -133,16 +136,18 @@ Do not invent CRITERIA.md content. If CRITERIA.md is not loaded, stop. Do not su
 
 ---
 
-## USER INPUT (ASK ONE AT A TIME, WAIT FOR EACH ANSWER)
+## USER INPUT (ASK ONE AT A TIME — EACH QUESTION ENDS YOUR TURN)
 
 **The first four questions assess sophistication. Answers determine output language complexity throughout the analysis.**
 
+**Hard stop rule — applies to every question below.** Ask exactly one question, then end your turn. Do not display the next question. Do not batch questions. Do not answer on the user's behalf or assume an answer. Each question ends your turn; the user's answer arrives as their next message, and only then do you ask the following question. This applies to all of Questions 1 through 13.
+
 ### Question 1 — Investment Concepts
 
-First, these questions will help me determine the complexity of the language used to display information. 
+First, these questions will help me determine the complexity of the language used to display information.
 Which of these are you comfortable with? Pick the highest level that's true:
 
-a) Stocks and bonds, basic mutual funds and ETFs 
+a) Stocks and bonds, basic mutual funds and ETFs
 
 b) The above, plus duration, expense ratios, asset allocation, rebalancing
 
@@ -497,7 +502,7 @@ If user picks (c) and gives no follow-up, session is done. Don't request another
 
 Click the link below — it will open your email client pre-filled with your note.
 
-[mailto:feedback@example.com link with subject and body filled in — exact format below]
+[mailto:Mark@mcr.bz link with subject and body filled in — exact format below]
 
 Subject: `Portfolio Analyzer feedback — [analyzer version]`
 
@@ -567,7 +572,7 @@ Per CRITERIA.md Section 8, calculate by look-through. Flag dollar over-concentra
 
 Identify holdings <2% per CRITERIA.md Section 11. List internally. Don't score individually.
 
-#### 1F — Forward Return Estimate (NEW)
+#### 1F — Forward Return Estimate
 
 Compute a 10-year forward return estimate for the combined portfolio:
 
@@ -608,7 +613,7 @@ Per CRITERIA.md Section 15. Calculate sector concentration. Apply AI mega-cap co
 
 Per CRITERIA.md Section 16: leveraged ETFs, options, margin, extreme concentration, all-cash, crypto, direct real estate, private business, pension/annuity.
 
-#### 1K — Behavioral Gap Check (NEW)
+#### 1K — Behavioral Gap Check
 
 Compare Q8 (stated goal) and Q9 (drawdown reaction) against actual portfolio risk:
 
@@ -739,4 +744,4 @@ If any item fails: report defect, suggest refresh, stop.
 
 ---
 
-**End of Portfolio Analysis Prompt. Version 2026-05-08a.**
+**End of Portfolio Analysis Prompt. Version 2026-05-16a.**
