@@ -1,7 +1,7 @@
 # CRITERIA.md Update Prompt
 
-**Version:** 2026-05-08a
-**Last updated:** 2026-05-08
+**Version:** 2026-05-16a
+**Last updated:** 2026-05-16
 **Companion files:** CRITERIA.md (the file this prompt regenerates), PORTFOLIO-ANALYZER-PROMPT.md (the consumer of CRITERIA.md)
 
 ---
@@ -10,9 +10,9 @@
 
 | Version | Date | Changes |
 | :--- | :--- | :--- |
-| **2026-04-25b** | 2026-04-25 | Expanded scope to support analyzer 2026-04-25a. Section count 24 → 25. Five drawdown scenarios. Nine edge cases. AI Mega-Cap flag. |
 | **2026-05-07a** | 2026-05-07 | Formalized operator NEWS section. Added Step 0 — Operator News Review. |
-| **2026-05-08a** | 2026-05-08 | Major v3 restructure to align with analyzer 2026-05-08a and CRITERIA.md 2026-05-08a. **Section 4 subsections trimmed 16 → 14** — Climate and Demographics subsections removed (low decision-utility per refresh; relevant items kept in Watch List). Section count unchanged at 25. **Section 5 expanded with real-allocator backing** — each framework persona now references named published research (AQR, Swensen, Ilmanen, Arnott). **Section 22 trimmed 14 rows → 8 rows** — kept only highest-confidence signals. **Section 23 trimmed target 15-20 → 10 items** — measurable triggers and high impact only. **Section 24 must regenerate the pinned scoring algorithm verbatim** — replaced "proportional to match quality" with explicit per-category formula. Updated compatibility checklist. |
+| **2026-05-08a** | 2026-05-08 | Major v3 restructure to align with analyzer 2026-05-08a and CRITERIA.md 2026-05-08a. Section 4 subsections trimmed 16 → 14 — Climate and Demographics removed. Section 5 expanded with real-allocator backing. Section 22 trimmed 14 → 8 rows. Section 23 trimmed target to 10 items. Section 24 pinned scoring algorithm made verbatim. Updated compatibility checklist. |
+| **2026-05-16a** | 2026-05-16 | [verify]-handling overhaul following the 2026-05-16a CRITERIA.md refresh, which carried 25 [verify] tags forward without re-search — the exact silent-inheritance failure mode this prompt names. Converts exhortation into procedural gates. Added: mandatory pre-output [verify] reconciliation table, re-verification budget with progress reporting and partial-status protocol, [verify] reason codes, [verify] staleness ceiling, verification-first phase ordering, post-output validation walk, structured Change Log row format, repo-specific significant-event triggers, repo data types in staleness table, end-of-run article-suggestion question. Strengthened the confidence-penalty rule for [verify] tags. |
 
 ---
 
@@ -29,6 +29,8 @@ The refresh has two outputs, in this order:
 
 Do not interleave the two. Do all narration first, then output the file.
 
+**No questions during the run.** You do not ask the user questions while the refresh is in progress. Every decision during the run is governed by the procedural rules in this prompt. Uncertainty is resolved by rule, not by querying the user. There is exactly one permitted user-facing question, and it appears once at the very end of the run — see END-OF-RUN ARTICLE SUGGESTION below. If the user interrupts mid-run with a question or request, complete the current phase, note their input as a candidate for the Operator News Notes section or the next refresh, and continue. The refresh does not pause for user input.
+
 ---
 
 ## ROLE AND TASK
@@ -41,6 +43,16 @@ The static sections carry forward verbatim. Only dynamic sections require fresh 
 
 Output the entire file as a single continuous markdown document. No preamble inside the file output. Start with `# Portfolio Alignment Criteria File`. End with `*End of Portfolio Alignment Criteria File. Generated [TODAY'S DATE].*`.
 
+**The refresh proceeds in five phases, in strict order:**
+
+1. **Operator News Review (Step 0)** — read and route the Operator News Notes section.
+2. **Watch List review** — read prior Section 23 and process each item.
+3. **[verify] reconciliation** — produce the reconciliation table, resolve as many inherited [verify] tags as possible, report progress against the re-verification budget. This phase completes before general macro research begins.
+4. **General macro research** — work through the 14 subsections of Section 4 in order, plus framework sections, applying staleness thresholds and confidence labeling.
+5. **File output and validation** — emit the file as a single continuous markdown block, run the post-output validation walk, then ask the end-of-run article-suggestion question.
+
+You may not skip ahead from Phase 3 to Phase 4 to handle "easy figures first." [verify] reconciliation is the priority task because it represents accumulated technical debt; deferring it produces the silent-inheritance failure mode this prompt is built to prevent.
+
 ---
 
 ## STEP 0 — OPERATOR NEWS REVIEW (DO THIS FIRST)
@@ -49,7 +61,7 @@ Before any web search, read the OPERATOR NEWS NOTES section at the end of this p
 
 **Routing rules:**
 
-1. **Macro data point** (price, rate, ratio, official figure, policy decision, scheduled event date) → consider for matching subsection in Section 4. Operator's note is a *lead*, not a source. Confirm to a primary source within staleness threshold. If confirmation succeeds, cite the primary source. If confirmation fails within threshold, append `[verify]`.
+1. **Macro data point** (price, rate, ratio, official figure, policy decision, scheduled event date) → consider for matching subsection in Section 4. Operator's note is a *lead*, not a source. Confirm to a primary source within staleness threshold. If confirmation succeeds, cite the primary source. If confirmation fails within threshold, append `[verify]` with the appropriate reason code.
 
 2. **Tracked event or trigger** (upcoming meeting, awaited ruling, developing situation) → consider for Section 23 Watch List. Build a three-part entry: description — category — measurable trigger.
 
@@ -68,7 +80,7 @@ Before any web search, read the OPERATOR NEWS NOTES section at the end of this p
 
 **Narration format for operator items:**
 
-> *Operator note 1 of 3 — [brief summary]. Routing: [Section 4 subsection / Section 23 / Section 17–21 framework / declined]. Action: [confirmed via primary source X, updated; or could not confirm, applied [verify]; or not material, no change; or declined, reason].*
+> *Operator note 1 of 3 — [brief summary]. Routing: [Section 4 subsection / Section 23 / Section 17–21 framework / declined]. Action: [confirmed via primary source X, updated; or could not confirm, applied [verify:CODE]; or not material, no change; or declined, reason].*
 
 ---
 
@@ -81,6 +93,52 @@ Read Section 23 of the prior CRITERIA.md. For each item:
 3. **Escalated** — flag as priority update for the relevant macro subsection. May require a SIGNIFICANT EVENT announcement.
 
 This determines which macro subsections need urgent updates and which Watch List slots open up.
+
+---
+
+## MANDATORY PRE-OUTPUT [verify] RECONCILIATION
+
+This is Phase 3 of the refresh and completes before any general macro research (Phase 4) begins.
+
+Before emitting the final file, you MUST produce a reconciliation table during the narration phase. The table has one row per [verify] tag inherited from the prior CRITERIA.md. The table appears in the narration output — not buried inside the produced file.
+
+**Columns:**
+
+- **Figure** — what the [verify]-tagged value represents (e.g., "MSCI EM YTD return")
+- **Section** — where it appears in the prior file (e.g., "Section 4 — China and Emerging Markets")
+- **Prior value** — the value carried in the prior file
+- **Search performed** — Yes / No
+- **Query used** — the actual search query string, if Yes
+- **Result** — the figure found, or "not located"
+- **Decision** — Resolved / Re-flagged / Deferred
+- **Reason code** — required when Decision is Re-flagged or Deferred (see [verify] TAG MAINTENANCE)
+- **New value** — the value written to the new file
+
+**Rules:**
+
+- A row with Decision = Deferred and no reason code is a prompt violation. Self-detect this before emitting the file and resolve it — either by searching, or by assigning the correct reason code.
+- The table must be complete before any file output begins. Narration order is: announce reconciliation phase → produce table → announce general macro phase → run subsection searches → produce file.
+- If the prior file contains zero [verify] tags, emit a one-line statement: "Prior file contained no [verify] tags; reconciliation table not required." This makes the absence visible rather than hidden.
+
+---
+
+## RE-VERIFICATION BUDGET
+
+Each refresh must target resolution of at least 80% of inherited [verify] tags. Track progress during the reconciliation phase and report it in narration.
+
+**Progress reporting format** (appears at start of reconciliation phase and after every fifth row):
+
+> *Reconciliation progress: [resolved] of [total inherited] [verify] tags resolved; [remaining] remaining; current resolution rate [percent]%.*
+
+If the final resolution rate is below 80%, you must:
+
+1. Note the shortfall in narration with explicit reasons by category (e.g., "6 institutional figures and 2 aggregated-monthly figures account for the 11 deferred items; 14 of 17 attempted resolutions succeeded for an 82% attempted-resolution rate.").
+2. Append `-partial` to the version suffix in Section 1 (e.g., `2026-05-16a-partial`).
+3. Add a Change Log entry noting the partial status and the count of unresolved [verify] tags.
+
+The 80% target is a procedural gate, not a quality recommendation. A run is "complete" only if the budget is met or the partial-status protocol above is followed.
+
+Items legitimately in the `[verify:institutional]`, `[verify:aggregated-monthly]`, and `[verify:low-utility]` categories do not count against the budget when the reason for deferral is structurally valid (e.g., a quarterly figure cannot be resolved mid-quarter). The budget targets `[verify:search-failed]` and untagged inheritance specifically.
 
 ---
 
@@ -131,6 +189,12 @@ When you encounter a development that materially shifts the macro picture, frame
 - Stablecoin de-pegging affecting Treasury bill demand at scale
 - Material regime change in a G7 economy
 - Single-day market moves exceeding 5% in S&P 500, 10% in Bitcoin, 5% in DXY, or 8% in gold
+- Sustained mid-month SRF (Standing Repo Facility) usage above $10B, outside the quarter-end / year-end window
+- Single-day SRF usage above $50B at any time
+- SOFR-IORB spread persistently above 5bp for more than three trading days
+- Bank reserves falling below $2.5T (reserve scarcity threshold)
+- Fed announcement of any change to QT pace, an IORB rate adjustment outside an FOMC meeting, or restart of QE under any name
+- Treasury basis trade unwind episode (visible in CFTC Commitment of Traders data, or sustained simultaneous weakness in spot Treasuries and Treasury futures)
 
 If unsure whether an event is significant, flag it. Over-flagging is preferable to silent omission.
 
@@ -147,36 +211,78 @@ If unsure whether an event is significant, flag it. Over-flagging is preferable 
 | Quarterly filings (10-Q, 13F, AUM) | Most recent filing | Note filing date |
 | Treasury auction stats | Within 30 days | Most recent matching maturity |
 | Hyperscaler capex guidance | Most recent earnings call | Note source and date |
+| SOFR daily rate | Same day | NY Fed publishes daily |
+| SRF usage daily | Within 7 days | NY Fed publishes daily; aggregate monthly |
+| Bank reserves (H.4.1) | Within 14 days | Fed H.4.1 publishes weekly |
+| Treasury basis trade size estimates | Within 90 days | Institutional; quarterly cadence typical |
+| Investment-grade / high-yield credit yields | Within 7 days | FRED ICE BofA series; daily |
+| Credit spreads (OAS) | Within 7 days | FRED ICE BofA series; daily |
 | Framework commentary (Dalio, Dimon, Marks) | Within 60 days | Source-dependent |
 | Framework commentary (Buffett/Abel) | Within 90 days | Annual letter and quarterly meeting primary |
 | Framework commentary (Blanchard) | Within 90 days | Academic/think-tank cadence |
 
-If a figure cannot be sourced within its threshold, append `[verify]` inline AND add to Section 13. Do not silently carry forward.
+If a figure cannot be sourced within its threshold, append `[verify:CODE]` inline AND add to Section 13. Do not silently carry forward.
+
+---
+
+## [verify] TAG STALENESS CEILING
+
+Each [verify] tag carries an inline "Date First Flagged" timestamp in the format `[verify:CODE, flagged YYYY-MM-DD]`. This date persists across refreshes; it is set only when the tag is first applied and is never reset by a subsequent refresh that defers the same figure.
+
+**Ceiling rules:**
+
+- **0–60 days since first flagged:** Normal handling per the re-verification budget.
+- **61–90 days since first flagged:** The figure must be re-attempted at the next refresh regardless of reason code. Narration notes "approaching ceiling."
+- **91–179 days since first flagged:** The figure is auto-promoted to a Section 23 Watch List item with priority Immediate watch. The Watch List entry persists until the figure is either resolved or removed.
+- **180+ days since first flagged:** The figure is removed from the file entirely unless re-verified in the current refresh. A Change Log entry records the removal.
+
+At the start of the reconciliation phase, scan for ceiling violations and report them:
+
+> *Ceiling scan: [N] [verify] tags exceed the 90-day threshold; [M] exceed the 180-day threshold. Promotion and removal actions follow.*
+
+This rule prevents the "permanent [verify]" pattern where a figure becomes structurally unverifiable and silently persists across many refreshes.
 
 ---
 
 ## CONFIDENCE LABELING RUBRIC
 
 - **High** — primary-source current data within staleness threshold; figures reproducible from named source
-- **Medium** — trend-based, modeled, or secondary-source data; figures directionally correct with interpretive range; OR one or more `[verify]` tags
+- **Medium** — trend-based, modeled, or secondary-source data; figures directionally correct with interpretive range
 - **Low** — significantly stale, single-source-only, or contested data; orientation only
 
-A subsection drops one confidence level for each of: missing primary source; reliance on a single secondary source; presence of `[verify]` tags on more than 25% of stated figures.
+**A subsection's confidence level is computed by these rules, applied in order:**
+
+1. Start at the intrinsic level above, based on source quality and recency.
+2. Drop one full confidence level for any of: missing primary source; reliance on a single secondary source.
+3. Drop half a confidence level (rounded down) for each `[verify]` tag present, regardless of reason code. A subsection cannot be rated High if it contains any `[verify]` tag. A subsection containing four or more `[verify]` tags is automatically Low.
+4. `[verify:institutional]` and `[verify:aggregated-monthly]` tags apply the same penalty as any other reason code — the reason for deferral does not exempt the figure from the confidence consequence.
+
+The downstream analyzer treats Low-confidence subsections with reduced weight. This creates a concrete cost for deferral and disincentivizes carrying [verify] tags indefinitely.
 
 ---
 
 ## [verify] TAG MAINTENANCE
 
-- When you cannot confirm a figure to a primary source within its staleness threshold, append `[verify]` inline AND add to Section 13.
-- When a `[verify]`-tagged figure is now confirmed, remove the tag inline AND remove from Section 13.
+- When you cannot confirm a figure to a primary source within its staleness threshold, append `[verify:CODE, flagged YYYY-MM-DD]` inline AND add to Section 13.
+- When a `[verify]`-tagged figure is now confirmed, remove the entire tag (including the reason code and flagged date) inline AND remove from Section 13.
 - Section 13 list at end of refresh must match inline `[verify]` tags exactly. No orphans either direction.
 - Carrying a figure forward without confirmation is not permitted as a substitute for `[verify]` flagging.
+
+**Reason codes — every [verify] tag must carry one.** The plain `[verify]` tag without a reason code is not permitted. Legal codes:
+
+- `[verify:institutional]` — figure exists in institutional or private data sources not publicly aggregated (e.g., Treasury basis trade size, fund-level BDC redemption breakdowns, dealer balance-sheet capacity).
+- `[verify:aggregated-monthly]` — figure publishes on a monthly or quarterly cadence and the current period falls between releases (e.g., Core PCE before the next BLS release).
+- `[verify:low-utility]` — figure has been deprioritized for this analyzer's primary use case but is retained for completeness (e.g., BOJ/ECB specifics for a US-base-currency portfolio focused on US frameworks).
+- `[verify:search-failed]` — you attempted to source the figure within its staleness threshold and could not locate it. This code requires the failed search query to appear in the reconciliation table.
+- `[verify:first-flag]` — the figure is being [verify]-tagged for the first time this refresh (not inherited). The Date First Flagged is today's date.
+
+Any untagged `[verify]` entry inherited from a prior version must be assigned a reason code on first contact, recorded in the reconciliation table, and rewritten with the code and a flagged date attached. If the original flag date is unknown, use the prior file's refresh date as the flagged date and note the assumption in narration.
 
 ---
 
 ## DO NOT CARRY FORWARD WITHOUT RE-VERIFICATION
 
-Do not inherit any dynamic figure from the prior file without independently confirming it to a primary source within this run. If confirmation fails, flag `[verify]`. If you find evidence the prior figure is now wrong, update it and note the change in narration. Silent inheritance is the most common failure mode for this prompt — actively guard against it.
+Do not inherit any dynamic figure from the prior file without independently confirming it to a primary source within this run. If confirmation fails, flag `[verify:CODE]`. If you find evidence the prior figure is now wrong, update it and note the change in narration. Silent inheritance is the most common failure mode for this prompt. The reconciliation table, re-verification budget, staleness ceiling, and confidence penalty above exist specifically to make silent inheritance procedurally impossible rather than merely discouraged — follow them as gates, not suggestions.
 
 ---
 
@@ -198,7 +304,7 @@ Output exactly:
 
     *Next scheduled refresh: [DATE ONE MONTH FROM TODAY]*
 
-**Version suffix rule:** Letter suffix for same-day revisions (`2026-05-08a`, `2026-05-08b`). First refresh of a day gets `a`.
+**Version suffix rule:** Letter suffix for same-day revisions (`2026-05-16a`, `2026-05-16b`). First refresh of a day gets `a`. If the re-verification budget is not met, append `-partial` per the RE-VERIFICATION BUDGET rule.
 
 ---
 
@@ -206,11 +312,25 @@ Output exactly:
 
 Output `## SECTION 2 — CHANGE LOG` followed by markdown table with columns: Date, Version, Description of Changes.
 
-**Carry forward only the most recent 3 entries from the prior version.** Older entries are dropped (full history is preserved in git). Add one new row for this refresh:
+**Carry forward only the most recent 3 entries from the prior version.** Older entries are dropped (full history is preserved in git). Add one new row for this refresh.
 
-    | [TODAY'S DATE] | [TODAY'S DATE WITH SUFFIX] | [Specific description of what changed] |
+**The new row's Description must follow this structured format:**
 
-Description must be specific. Bad: "Refresh." Good: "Updated US debt to $39.52T. Updated gold to $4,800. Resolved Watch List items 1, 7. Added Watch List items for [event]. Ingested 2 of 3 operator news notes."
+`[Resolved: N] [Updated: M] [Added: P] [Watch List delta: +X/-Y] | [Significant events, comma-separated, or "None"] | [Free-text summary, 1-2 sentences]`
+
+Where:
+- **Resolved** = count of [verify] tags removed this refresh
+- **Updated** = count of figures changed (excluding [verify] resolutions)
+- **Added** = count of new figures, subsections, or items introduced
+- **Watch List delta** = items added / items removed
+- **Significant events** = comma-separated list of SIGNIFICANT EVENT flags raised this refresh, or "None"
+- **Free-text summary** = brief prose summary of the refresh's character
+
+Example:
+
+    | 2026-05-16 | 2026-05-16a | [Resolved: 14] [Updated: 22] [Added: 1 subsection] [Watch List delta: +2/-3] | Iran ceasefire deterioration, Warsh confirmed Fed Chair, April CPI 3.8% | Significant macro reset; regime call confirmed as inflationary with stagflation risk. |
+
+This format makes refresh productivity verifiable at a glance and prevents the "Refresh." or "Updated various figures." failure mode.
 
 ---
 
@@ -226,7 +346,7 @@ Output `## SECTION 4 — CURRENT MACRO ENVIRONMENT`.
 
 Preamble: `*Where recent data is unavailable, prior figures are carried forward only with [verify] tags. Inline [verify] tags must match the Section 13 list exactly.*`
 
-For each subsection: search within staleness threshold; add `*Last updated: [TODAY'S DATE]*` and `*Confidence: [High/Medium/Low]*`; append `[verify]` to figures that fail confirmation.
+For each subsection: search within staleness threshold; add `*Last updated: [TODAY'S DATE]*` and `*Confidence: [High/Medium/Low]*` (computed per the CONFIDENCE LABELING RUBRIC, including the [verify] penalty); append `[verify:CODE]` to figures that fail confirmation.
 
 **The 14 macro subsections, in order** (note: Climate and Demographics removed in v3):
 
@@ -363,9 +483,13 @@ Output `## SECTION 13 — MACRO VERIFICATION REQUIREMENTS`.
 
 Below: `*The following items carry [verify] tags inline in the file and require independent verification at next refresh. This list must match the inline [verify] tags exactly — no orphans in either direction.*`
 
-Bulleted list. Each bullet: `[verify]` + figure + where it appears.
+Bulleted list. Each bullet: full `[verify:CODE, flagged YYYY-MM-DD]` tag + figure + where it appears.
 
-**Reconstruction rule:** Walk the file you just produced and list every `[verify]` tag. Build the new list fresh from this refresh's actual `[verify]` decisions.
+**Group the list by reason code** under four sub-headings: Institutional, Aggregated-monthly, Low-utility, Search-failed. This makes the character of the outstanding verification debt visible at a glance.
+
+**Add a closing note** stating, for each deferred item or category, why it was not resolved this refresh (institutional data not publicly aggregated; monthly publication cadence; low decision-utility for the analyzer's primary use case; or search attempted and failed). Any `[verify:search-failed]` item must also have its failed query recorded in the reconciliation table produced during narration.
+
+**Reconstruction rule:** Walk the file you just produced and list every `[verify]` tag. Build the new list fresh from this refresh's actual `[verify]` decisions. The Section 13 list, the inline tags, and the reconciliation table must all be mutually consistent.
 
 ---
 
@@ -567,8 +691,8 @@ Maintain ~10 items covering: Fed meetings and data; major framework events (Dimo
 - Resolved this refresh: removed; note resolution in narration
 - Pending: carry forward with updated status
 - Escalated: re-categorize from Criteria refresh to Immediate watch if appropriate
-- New: add for any SIGNIFICANT EVENT flagged this refresh; add for newly emerging risks; add for operator news items routed to Section 23 in Step 0
-- **Cap at ~10 items.** If new additions push the list over 10, drop the lowest-priority items. Quality over completeness.
+- New: add for any SIGNIFICANT EVENT flagged this refresh; add for newly emerging risks; add for operator news items routed to Section 23 in Step 0; add for any [verify] tag auto-promoted under the [verify] TAG STALENESS CEILING rule (91–179 day band)
+- **Cap at ~10 items.** If new additions push the list over 10, drop the lowest-priority items. Quality over completeness. Note: [verify] tags promoted under the staleness ceiling rule are not subject to being dropped for cap reasons — they persist until resolved or removed.
 
 ---
 
@@ -682,33 +806,84 @@ Walk this checklist. Fix any failure before emitting.
 18. ☐ Section 25 contains both benchmark portfolios with full attributes
 19. ☐ Footer matches specified format
 20. ☐ Every dynamic subsection has Last updated and Confidence labels
-21. ☐ Change Log Section 2 has new row specific to this refresh AND only carries last 3 prior rows
+21. ☐ Change Log Section 2 has new row in the structured format specific to this refresh AND only carries last 3 prior rows
 22. ☐ Version date in Section 1 matches Change Log new row date
 23. ☐ Operator news items processed per Step 0 — each ingested, confirmed-not-material, or declined with reason in narration
+24. ☐ Pre-output [verify] reconciliation table produced in narration, one row per inherited [verify] tag, all rows have a Decision and (where deferred) a reason code
+25. ☐ Re-verification budget reported; resolution rate stated; `-partial` suffix applied if below 80%
+26. ☐ Every [verify] tag inline carries a reason code and a flagged date
+27. ☐ [verify] staleness ceiling scan performed; items in 91–179 day band promoted to Watch List; items past 180 days removed or re-verified
 
 If any box unchecked, fix and recheck before emitting.
 
 ---
 
+## POST-OUTPUT VALIDATION
+
+After emitting the file, perform a self-check walk and report the results in a final narration block. The end-of-run article-suggestion question follows after this block.
+
+**Validation items:**
+
+- **Section count:** File contains exactly 25 sections numbered 1 through 25, in order, with no gaps or duplicates.
+- **Static section integrity:** Every section marked "static — copy verbatim" has been copied without modification other than header reformatting. Spot-check at least three static sections by character-count comparison against the prior file. Flag any deviation greater than ±2%.
+- **[verify] tag census:** Inline [verify] tag count equals Section 13 list count exactly. No orphans in either direction. Both equal the reconciliation table row count for inherited tags, plus any new `[verify:first-flag]` tags added this refresh.
+- **Reason code coverage:** Every inline [verify] tag carries a legal reason code and a flagged date.
+- **Date consistency:** Every "Last updated:" timestamp in Section 4 subsections matches the current refresh date or carries a valid carry-forward note. Section 1 version date matches the Change Log new-row date.
+- **Cross-reference integrity:** Every section referenced by number elsewhere in the file (e.g., "per Section 7") points to a section that exists.
+- **Reconciliation coverage:** The reconciliation table covers exactly the [verify] tags present in the prior file — no missing rows, no extra rows.
+
+**Validation output format:**
+
+> *Validation walk: 25/25 sections present; [verify] census [N] inline / [N] in Section 13 / [N] reconciliation rows (match); reason codes [OK / list gaps]; static section integrity [OK / list deviations]; date consistency [OK / list issues]; cross-reference integrity [OK / list issues]; reconciliation coverage [N]/[N] (match).*
+
+Any failure must be resolved before declaring the run complete. You may emit a corrected file and a new validation walk.
+
+---
+
+## END-OF-RUN ARTICLE SUGGESTION
+
+After all narration, file output, and the post-output validation walk are complete, ask the user exactly one question. This is the only user-facing question permitted during the entire run.
+
+The question text is fixed:
+
+> *Refresh complete. Are there any article links — research, news, analysis, or commentary — that you would like considered for the next refresh? Examples: a topic that came up in your reading, an area you want covered more deeply, or a specific source or framework to incorporate. If yes, paste the links with a brief note on why each one matters, and I will add them to the Operator News Notes section for the next refresh to pick up. If no, reply "none" and the run ends here.*
+
+**Handling the user's response:**
+
+- If the user replies "none" or equivalent, the run ends.
+- If the user provides article links, confirm receipt by listing the links back, then format them into the Operator News Notes paste-zone format (Date / Source / URL / Why it matters) so they are ready for the next refresh's Step 0. This is a follow-up action — the file already emitted stands as final. The links are not ingested into the current refresh.
+
+**Rules:**
+
+- This question appears once, at the very end. It does not appear mid-run under any circumstances.
+- Do not ask "any questions about this refresh?" or "should I continue?" or "shall I update X?" or any other mid-run prompt-style interaction. All decisions during the run are governed by the procedural rules in this prompt.
+- This rule overrides any general "ask the user when uncertain" disposition. Uncertainty during the run is resolved by procedural rule, not by user query.
+
+---
+
 ## OUTPUT REQUIREMENTS
 
-1. Real-time progress narration first, beginning with Step 0 operator news review. Complete all of it before file output.
+1. Real-time progress narration first, beginning with Step 0 operator news review, then Watch List review, then the [verify] reconciliation table and re-verification budget report, then general macro research. Complete all of it before file output.
 2. Then output entire CRITERIA.md as one continuous markdown document.
 3. No preamble, summary, or commentary inside the file.
 4. Start with `# Portfolio Alignment Criteria File`.
 5. End with `*End of Portfolio Alignment Criteria File. Generated [TODAY'S DATE].*`.
 6. All 25 numbered sections present in specified order.
-7. Where information cannot be found within staleness threshold: flag `[verify]` — do not fabricate.
+7. Where information cannot be found within staleness threshold: flag `[verify:CODE]` — do not fabricate.
 8. Every dynamic subsection has Last updated and Confidence labels.
 9. Every cell change in Section 22 has a sourced note below the table.
 10. Section 24 pinned scoring algorithm copied verbatim — do NOT regenerate freely.
-11. Run the Analyzer Compatibility Checklist before emitting.
+11. Run the Analyzer Compatibility Checklist before emitting the file.
+12. Run the Post-Output Validation walk after emitting the file.
+13. Ask the End-of-Run Article Suggestion question last.
 
 ---
 
 ## OPERATOR NEWS NOTES — REFRESH AGENT INPUT
 
 This section is for the operator (the human running the refresh) to paste news articles, excerpts, links, or commentary that should be considered as candidate inputs for the next refresh. The refresh agent processes this section in **Step 0** before any web search.
+
+The refresh agent also writes to this section: at the end of a run, the End-of-Run Article Suggestion question invites the operator to supply links, and any links supplied are formatted into this section for the next refresh to pick up.
 
 **Operator instructions — how to use this section:**
 
@@ -744,4 +919,4 @@ This section is for the operator (the human running the refresh) to paste news a
 
 ---
 
-*End of CRITERIA.md Update Prompt. Version 2026-05-08a.*
+*End of CRITERIA.md Update Prompt. Version 2026-05-16a.*
