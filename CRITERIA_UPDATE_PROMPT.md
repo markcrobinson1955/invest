@@ -49,7 +49,7 @@ Output the entire file as a single continuous markdown document. No preamble ins
 2. **Watch List review** — read prior Section 23 and process each item.
 3. **[verify] reconciliation** — produce the reconciliation table, resolve as many inherited [verify] tags as possible, report progress against the re-verification budget. This phase completes before general macro research begins.
 4. **General macro research** — work through the 14 subsections of Section 4 in order, plus framework sections, applying staleness thresholds and confidence labeling.
-5. **File output and validation** — emit the file as a single continuous markdown block, run the post-output validation walk, then ask the end-of-run article-suggestion question.
+5. File output and validation — create the replacement CRITERIA.md at /mnt/user-data/outputs/CRITERIA.md using create_file, then call present_files with that path to make it downloadable. Do not emit the file as inline markdown text. Then run the post-output validation walk and ask the end-of-run article-suggestion question.
 
 You may not skip ahead from Phase 3 to Phase 4 to handle "easy figures first." [verify] reconciliation is the priority task because it represents accumulated technical debt; deferring it produces the silent-inheritance failure mode this prompt is built to prevent.
 
@@ -177,6 +177,13 @@ When you encounter a development that materially shifts the macro picture, frame
 > Action: [add to which subsection / Watch List item / framework Current Thesis].
 > Note: This may require manual review of static framework allocations on the next pass.
 
+Plain-language annotation rule:
+When reporting a figure or event that has investment significance, follow it with a one-sentence plain-language note in parentheses explaining why it matters. Keep it brief and non-technical. Examples:
+CPI rose to 3.8% YoY in April. (This means prices are rising faster than they were — bad news for bonds and for the Fed's ability to cut rates.)
+UMich consumer sentiment fell to 44.8, a fresh all-time low. (People feel worse about the economy right now than at any point since this survey began in 1952 — including during COVID, the 2008 crash, and the 1970s inflation crisis.)
+HY OAS at 2.76%. (This is the extra yield junk bonds pay over safe Treasuries. At 2.76% it's very thin — investors aren't being paid much to take credit risk, which Marks would flag as a warning sign.)
+Section 122 tariffs struck down by CIT, CAFC administrative stay issued. (A court said the 10% global tariff was illegal, but a higher court hit pause on that ruling — so most importers still have to pay for now.)
+
 **Significant-event triggers — examples:**
 
 - Direct kinetic conflict between major powers
@@ -197,7 +204,7 @@ When you encounter a development that materially shifts the macro picture, frame
 - Treasury basis trade unwind episode (visible in CFTC Commitment of Traders data, or sustained simultaneous weakness in spot Treasuries and Treasury futures)
 
 If unsure whether an event is significant, flag it. Over-flagging is preferable to silent omission.
-
+No interleaving with file output. When all narration is complete, create and present the downloadable file. Do not output the markdown to chat.
 ---
 
 ## STALENESS THRESHOLDS BY DATA TYPE
