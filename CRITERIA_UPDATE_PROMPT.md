@@ -1,7 +1,7 @@
 # CRITERIA.md Update Prompt
 
-**Version:** 2026-05-16a
-**Last updated:** 2026-05-16
+**Version:** 2026-07-28a
+**Last updated:** 2026-07-28
 **Companion files:** CRITERIA.md (the file this prompt regenerates), PORTFOLIO-ANALYZER-PROMPT.md (the consumer of CRITERIA.md)
 
 ---
@@ -13,6 +13,7 @@
 | **2026-05-07a** | 2026-05-07 | Formalized operator NEWS section. Added Step 0 — Operator News Review. |
 | **2026-05-08a** | 2026-05-08 | Major v3 restructure to align with analyzer 2026-05-08a and CRITERIA.md 2026-05-08a. Section 4 subsections trimmed 16 → 14 — Climate and Demographics removed. Section 5 expanded with real-allocator backing. Section 22 trimmed 14 → 8 rows. Section 23 trimmed target to 10 items. Section 24 pinned scoring algorithm made verbatim. Updated compatibility checklist. |
 | **2026-05-16a** | 2026-05-16 | [verify]-handling overhaul following the 2026-05-16a CRITERIA.md refresh, which carried 25 [verify] tags forward without re-search — the exact silent-inheritance failure mode this prompt names. Converts exhortation into procedural gates. Added: mandatory pre-output [verify] reconciliation table, re-verification budget with progress reporting and partial-status protocol, [verify] reason codes, [verify] staleness ceiling, verification-first phase ordering, post-output validation walk, structured Change Log row format, repo-specific significant-event triggers, repo data types in staleness table, end-of-run article-suggestion question. Strengthened the confidence-penalty rule for [verify] tags. |
+| **2026-07-28a** | 2026-07-28 | Truncation-handling overhaul following the discovery that the 2026-05-27a refresh dropped Sections 17–25 and the 2026-07-01a refresh inherited the loss — the committed file went two months without the framework definitions, consensus signals, watch list, scoring algorithm, or benchmarks. Root cause was not a missing "emit all sections" instruction (the prompt already carried three) but four gaps around it. Added: authoritative prior-version source pinned to the repository fetch rather than conversation context; Phase 0 integrity gate on the fetched base; explicit HARD STOP protocol carving an abort path out of the no-questions rule; absolute ban on pointers, TODOs, and stubs; mechanical checklist procedures replacing self-graded checkboxes, with counts reported as numbers. Corrected checklist item 2, which demanded Sections 1–25 while every file ever produced ran 2–25 and every run still self-reported pass. |
 
 ---
 
@@ -29,7 +30,7 @@ The refresh has two outputs, in this order:
 
 Do not interleave the two. Do all narration first, then output the file.
 
-**No questions during the run.** You do not ask the user questions while the refresh is in progress. Every decision during the run is governed by the procedural rules in this prompt. Uncertainty is resolved by rule, not by querying the user. There is exactly one permitted user-facing question, and it appears once at the very end of the run — see END-OF-RUN ARTICLE SUGGESTION below. If the user interrupts mid-run with a question or request, complete the current phase, note their input as a candidate for the Operator News Notes section or the next refresh, and continue. The refresh does not pause for user input.
+**No questions during the run.** You do not ask the user questions while the refresh is in progress. Every decision during the run is governed by the procedural rules in this prompt. Uncertainty is resolved by rule, not by querying the user. There is exactly one permitted user-facing question, and it appears once at the very end of the run — see END-OF-RUN ARTICLE SUGGESTION below. **This rule constrains questions, not aborts.** It never requires you to fabricate or stub content you were unable to obtain: if source material is missing, the HARD STOP protocol in ROLE AND TASK applies and takes precedence over everything in this paragraph. If the user interrupts mid-run with a question or request, complete the current phase, note their input as a candidate for the Operator News Notes section or the next refresh, and continue. The refresh does not pause for user input.
 
 ---
 
@@ -41,10 +42,53 @@ Search the web for current information and produce a complete replacement CRITER
 
 The static sections carry forward verbatim. Only dynamic sections require fresh research.
 
+### The prior version — authoritative source
+
+Every instruction in this prompt that says "copy verbatim from prior version" refers to one specific artifact: the current committed `CRITERIA.md` on the `main` branch of the source repository, fetched at the start of the run from
+
+```
+https://api.github.com/repos/markcrobinson1955/invest/contents/CRITERIA.md
+```
+
+That fetch is the only authoritative base. A copy pasted into the conversation, a file in a working directory, a summary, an export from another tool, or your own recollection of a previous run are **not** authoritative and must not be used as the base for carry-forward text. Any of them may be stale, truncated, or already damaged.
+
+Before any research begins, confirm the fetched base contains all 25 section headings and that Sections 17 through 25 are present in full. If it does not, you are holding a damaged file — see HARD STOP below. Do not reconstruct missing text from your own knowledge of what it probably said, and do not proceed assuming a later phase will fill the gap.
+
+**Why this rule exists.** The 2026-05-27a refresh ran without the full text of Sections 17–25, replaced them with a pointer note and a maintainer TODO, and emitted the result anyway. The 2026-07-01a refresh then took that damaged output as its own prior version and inherited the loss. Truncation propagates silently because each run's base is the previous run's output; pinning the base to the repository is what breaks the chain.
+
+### Never emit a placeholder
+
+The replacement file must carry real content in every section. You may not, under any circumstance, emit:
+
+- a pointer or cross-reference standing in for content ("Sections 17 through 25 unchanged — see prior version")
+- a note addressed to a maintainer, a TODO, a FIXME, or a "to be restored" marker
+- an ellipsis, a bracketed stub, or any other abbreviation of content you could not obtain
+- a section heading with no body
+
+If you cannot produce a section's real content, the run has failed — stop and report rather than papering over the gap. A file that is visibly incomplete gets fixed. A file that looks complete and is not gets scored against and trusted.
+
+### HARD STOP — the one case that overrides "no questions"
+
+The no-questions rule governs *judgement*: which figure to trust, whether a change is material, how to word a thesis. It does not oblige you to invent content you do not have.
+
+Stop the run and report to the user, emitting no file, if any of the following holds:
+
+- the prior-version fetch failed, returned a partial file, or returned a file missing any of Sections 1 through 25
+- any section marked "static — copy verbatim" cannot be sourced from the fetched base
+- the pinned scoring algorithm in Section 24 is absent or altered in the fetched base
+- you reach the output phase and any section would have to be summarized, stubbed, or omitted
+
+Report in this form:
+
+> *HARD STOP — [what is missing]. Source checked: [URL]. The refresh cannot produce a complete file without this content. No file emitted. To recover: supply the missing section text, or identify the last commit in which it was intact.*
+
+Stopping is the correct outcome here. An aborted run costs one refresh cycle; a silently truncated file costs every analysis run until someone notices, which in the May–July 2026 case took two months.
+
 Output the entire file as a single continuous markdown document. No preamble inside the file output. Start with `# Portfolio Alignment Criteria File`. End with `*End of Portfolio Alignment Criteria File. Generated [TODAY'S DATE].*`.
 
-**The refresh proceeds in five phases, in strict order:**
+**The refresh proceeds in six phases, in strict order:**
 
+0. **Base acquisition and integrity gate** — fetch the prior CRITERIA.md from the repository URL above. Count the `## SECTION` headings and confirm 25, numbered 1 through 25 with no gaps or duplicates. Confirm Sections 17–25 carry full content, not pointers. Confirm Section 24 contains the pinned scoring algorithm. Report the counts as numbers in narration. If any check fails, HARD STOP — do not continue to Phase 1.
 1. **Operator News Review (Step 0)** — read and route the Operator News Notes section.
 2. **Watch List review** — read prior Section 23 and process each item.
 3. **[verify] reconciliation** — produce the reconciliation table, resolve as many inherited [verify] tags as possible, report progress against the re-verification budget. This phase completes before general macro research begins.
@@ -793,9 +837,13 @@ Output exactly:
 
 Walk this checklist. Fix any failure before emitting.
 
+**Report every count as an actual number, not a tick.** A checkbox you grade yourself is not evidence. Where an item names a count, state the number you measured and the number expected — "25/25", "8/8", "14/14". Where an item names a comparison against the fetched base, state the measured delta. An item whose number you did not actually measure is a failure, not a pass.
+
+This matters because checklist item 2 below previously read "Sections numbered 1–25" while every file the prompt had ever produced ran 2–25 with no Section 1. The check was wrong for months and every run still reported pass, because passing cost nothing but a tick.
+
 1. ☐ File starts with `# Portfolio Alignment Criteria File`
-2. ☐ Sections numbered 1–25, in order, with section headings as specified
-3. ☐ Section 4 has 14 subsections (Climate and Demographics removed)
+2. ☐ Sections numbered 1–25, in order, with no gaps or duplicates — count the `## SECTION` headings and state the number. **Section 1 (FILE PURPOSE AND SCOPE) is required and was first added in CRITERIA.md 2026-07-28a; files predating it began at Section 2 and are non-conforming.**
+3. ☐ Section 4 has 14 subsections (Climate and Demographics removed) — state the number
 4. ☐ Section 5 contains all five regime definitions verbatim
 5. ☐ Section 5 contains real-allocator backing for all five frameworks (AQR, Swensen, Ilmanen/Arnott, etc.)
 6. ☐ Section 6 horizon caps are graduated 75% / 65% / 55%
@@ -821,7 +869,12 @@ Walk this checklist. Fix any failure before emitting.
 26. ☐ Every [verify] tag inline carries a reason code and a flagged date
 27. ☐ [verify] staleness ceiling scan performed; items in 91–179 day band promoted to Watch List; items past 180 days removed or re-verified
 
-If any box unchecked, fix and recheck before emitting.
+28. ☐ Base provenance stated — the prior version was fetched from the repository URL, not taken from conversation context, a pasted copy, or recollection. Name the source and the fetched file's size or SHA.
+29. ☐ Placeholder scan run against the finished file — zero occurrences of "see prior version", "unchanged — see", "NOTE TO MAINTAINER", "TODO", "FIXME", "to be restored", "[section omitted]", or a bare heading followed by another heading. State the number found (must be 0).
+30. ☐ Section 17–25 content check — each of these nine sections contains its full body, not a reference to where the body used to be. State the character count of Sections 17–25 combined and compare against the fetched base; a drop of more than 20% is a failure requiring explanation.
+31. ☐ Section 24 pinned algorithm compared character-by-character against the fetched base. State identical or list every difference. Any difference that is not a deliberate, narrated change is a failure.
+
+If any box unchecked, fix and recheck before emitting. If a box cannot be checked because source content is missing, do not emit a partial file — HARD STOP and report.
 
 ---
 
@@ -832,7 +885,9 @@ After emitting the file, perform a self-check walk and report the results in a f
 **Validation items:**
 
 - **Section count:** File contains exactly 25 sections numbered 1 through 25, in order, with no gaps or duplicates.
-- **Static section integrity:** Every section marked "static — copy verbatim" has been copied without modification other than header reformatting. Spot-check at least three static sections by character-count comparison against the prior file. Flag any deviation greater than ±2%.
+- **Static section integrity:** Every section marked "static — copy verbatim" has been copied without modification other than header reformatting. Compare **every** static section by character count against the fetched base — not a spot-check of three. Spot-checking is what allowed nine consecutive sections to vanish unnoticed: a sample that happens to miss the damaged region reports clean. Flag any deviation greater than ±2%.
+- **Placeholder scan:** Zero occurrences in the emitted file of "see prior version", "unchanged — see", "NOTE TO MAINTAINER", "TODO", "FIXME", "to be restored", or a section heading immediately followed by another heading. Report the number found.
+- **Base provenance:** State where the prior version came from. If it was anything other than the repository fetch, the run is invalid regardless of every other check passing.
 - **[verify] tag census:** Inline [verify] tag count equals Section 13 list count exactly. No orphans in either direction. Both equal the reconciliation table row count for inherited tags, plus any new `[verify:first-flag]` tags added this refresh.
 - **Reason code coverage:** Every inline [verify] tag carries a legal reason code and a flagged date.
 - **Date consistency:** Every "Last updated:" timestamp in Section 4 subsections matches the current refresh date or carries a valid carry-forward note. Section 1 version date matches the Change Log new-row date.
@@ -841,7 +896,7 @@ After emitting the file, perform a self-check walk and report the results in a f
 
 **Validation output format:**
 
-> *Validation walk: 25/25 sections present; [verify] census [N] inline / [N] in Section 13 / [N] reconciliation rows (match); reason codes [OK / list gaps]; static section integrity [OK / list deviations]; date consistency [OK / list issues]; cross-reference integrity [OK / list issues]; reconciliation coverage [N]/[N] (match).*
+> *Validation walk: base fetched from [source], [size/SHA]; 25/25 sections present; Sections 17–25 [N] chars vs [N] in base ([±N]%); Section 24 [identical / differences listed]; placeholder scan [N] found (expect 0); [verify] census [N] inline / [N] in Section 13 / [N] reconciliation rows (match); reason codes [OK / list gaps]; static section integrity [OK / list deviations]; date consistency [OK / list issues]; cross-reference integrity [OK / list issues]; reconciliation coverage [N]/[N] (match).*
 
 Any failure must be resolved before declaring the run complete. You may emit a corrected file and a new validation walk.
 
@@ -870,6 +925,7 @@ The question text is fixed:
 
 ## OUTPUT REQUIREMENTS
 
+0. Fetch the prior CRITERIA.md from the repository URL and pass the Phase 0 integrity gate before anything else. Never base carry-forward text on conversation context, a pasted copy, or recollection. Never emit a pointer, TODO, stub, or empty section — HARD STOP instead.
 1. Real-time progress narration first, beginning with Step 0 operator news review, then Watch List review, then the [verify] reconciliation table and re-verification budget report, then general macro research. Complete all of it before file output.
 2. Then output entire CRITERIA.md as one continuous markdown document.
 3. No preamble, summary, or commentary inside the file.
