@@ -432,7 +432,7 @@ System-Defined Editorial Rule: Any position < 2% of total AUM is treated as "Noi
 
 * **Leveraged ETFs:** 2x/3x exposure to underlying; liquidity cap at 50% of nominal weight; moderate-to-critical red flag depending on size.
 * **Options:** Delta-adjusted exposure used for sector and concentration weighting. Premium-paid options below 1% of portfolio: ignored. Structured/leveraged option positions above 5%: critical red flag.
-* **Margin / Negative Cash:** Critical red flag for all five frameworks. Triggers 50% score cap regardless of size.
+* **Margin / Negative Cash:** Critical red flag for all five frameworks. Triggers a **50 ceiling** on the final score regardless of size (a ceiling, never a multiplier — see Section 24).
 * **Extreme Concentration (Score Ceilings** — a ceiling on the final 0–100 score, never a multiplier; see Section 24**):**
   * 25–50% single holding: **70 ceiling**
   * 50–70%: **55 ceiling**
